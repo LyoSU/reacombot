@@ -1,65 +1,65 @@
 ---
-language_name: '🇺🇸 English'
+language_name: '🇺🇦 Українська'
 help: |
-  <b>Hey! 👋</b>
-  I will add <u>reactions</u> to your posts on the channel along with <u>native comments</u>. It's enough just to add me to your channel, give me permission to edit messages, and also add me to the group that is tied to the channel.
+  <b>Привіт! 👋</b>
+  Я додам <u>реакцій</u> до ваших постів на каналі разом з <u>нативними коментарями</u>. Досить просто додати мене до вашого каналу, дайте мені дозвіл на редагування повідомлення, і також додай мене до групи, яка пов'язана з каналам.
 
-  • If you do not want me to change all messages or want to change emoji, then click the buttons below or send the command /channels to configure. <i>To display a channel in the list, you must first write any post.</i>
+  • Якщо ви не хочете, щоб я змінив всі повідомлення або хочете змінити емодзі потім натисніть на кнопки нижче або надішліть команду /channel щоб налаштувати. <i>Щоб відобразити канал у списку, необхідно спочатку написати будь-який повідомлення.</i>
 
-  <b>• Need help or have a suggestion?</b> Write to me: @Ly_OBot. Please write immediately what you are talking about and use English or Russian.
-  <b>• Do you like the bot?</b> You can help him at this link: donate.lyo.su
+  <b>• Потрібна допомога чи пропозиція?</b> Написати: @Ly_OBot. Будь ласка, напиши саме те, про що ви говорите і користуйтесь англійською, українською або російською.
+  <b>• Вам подобається бот?</b> Ви можете допомогти йому за посиланням: donate.lyo.su
 
-  🧑‍💻 Follow the developer: @LyBlog (Only in Russian)
+  🧑💻 Дотриматись розробника: @LyBlog
 menu:
-  channels: '📣 My channels'
+  channels: '📣 Мої канали'
 channels:
   select: |
-    Select channel:
+    Оберіть канал:
   not_found: |
-    <b>😞 You have not added the bot to any of the channels yet</b>
+    <b>😞 Ви не додали бота до будь-якого з каналів</b>
 
-    If you are sure that you did this, try to make sure that i have permission to edit messages and send any post to the channel.
+    Якщо ви впевнені, що ви це зробили, спробуйте переконатися, що я маю дозвіл на редагування повідомлень і відправляти будь-які повідомлення на канал.
   control:
     info: |
-      Channel selected: <b>${channel.title}</b>
+      Канал обрано: <b>${channel.title}</b>
 
-      • What do you want to change?
+      • Що ви хочете змінити?
     menu:
       emoji: '${channel.settings.emojis} Emojis'
-      type: '💬 When to add?'
-      links: '🔗 Links keyboard'
+      type: '💬 Коли додавати?'
+      links: '🔗 Клавіатура'
     types:
       info: |
-        <b>Choose when the bot can attach reactions to messages:</b>
+        <b>Виберіть, коли бот може додавати реакції до повідомлень:</b>
 
-        • Always: Reactions will be attached to every post whenever possible
-        • One time: Reactions will only be attached to one new post on the channel. Then this setting will change to "never" and you will need to change it again here
-        • Never: Bot will never attach reactions to your posts
+        • Завжди: реакції будуть додаватися до кожного повідомлення, коли це можливо
+        • Одноразово: Реакції додаватимуться лише до одного нового повідомлення на каналі. Потім це налаштування зміниться на "ніколи", і вам потрібно буде змінити його тут ще раз
+        • Ніколи: Бот ніколи не додаватиме реакцій на ваші повідомлення
       menu:
-        always: Always
-        one: One time
-        never: Never
+        always: Завжди
+        one: Одноразово
+        never: Ніколи
     emojis:
       send_emoji: |
-        <b>Send one or more emojis:</b>
+        <b>Надішліть один або кілька смайлів:</b>
 
-        Current: <code>${channel.settings.emojis}</code>
-        One emoji — one button
+        Поточні: <code>${channel.settings.emojis}</code>
+        Один смайлик - одна кнопка
     links:
       send_links: |
-        <b>Send keyboard list:</b>
+        <b>Надіслати список клавіатури:</b>
 
-        Example:
-        <pre>My site - https://lyo.su/ | Telegram - https://telegram.org/
+        Приклад:
+        <pre>Мій сайт - https://lyo.su/ | Telegram - https://telegram.org/
         Dev blog - https://t.me/LyBlog</pre>
 
-        Send any text to delete.
+        Надішліть будь-який текст для видалення.
 
-        <i>The current buttons will be displayed below</i>
-      success: Keyboard changed!
+        <i>Поточні кнопки відображатимуться нижче</i>
+      success: Клавіатуру змінено!
 rate:
   vote:
     rated: |
-      You ${rateName} this
+      Ви ${rateName} це
     back: |
-      You got your vote back
+      Ви повернули свій голос назад
