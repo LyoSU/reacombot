@@ -62,7 +62,11 @@ rate:
     rated: |
       Ви ${rateName} це
     back: |
-      Ви повернули свій голос назад
+      You took your reaction back
+    rated_limit: |
+      \n${rateName} — ${voteCount}
+
+      The post counter will be updated later
 wait: |
   🕒 Comments will be posted here soon...
 
