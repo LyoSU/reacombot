@@ -26,25 +26,12 @@ const setLanguage = async (ctx, next) => {
 
   if (ctx.updateType === 'callback_query') {
     if (locales[ctx.match[1]]) {
-      if (['supergroup', 'group'].includes(ctx.chat.type)) {
-        const chatMember = await ctx.tg.getChatMember(
-          ctx.callbackQuery.message.chat.id,
-          ctx.callbackQuery.from.id
-        )
+      ctx.state.answerCbQuery = [locales[ctx.match[1]].flag]
 
-        if (chatMember && ['creator', 'administrator'].includes(chatMember.status)) {
-          ctx.state.answerCbQuery = [locales[ctx.match[1]]]
-          ctx.session.channelInfo.info.settings.locale = ctx.match[1]
-          ctx.i18n.locale(ctx.match[1])
-          await next()
-        }
-      } else {
-        ctx.state.answerCbQuery = [locales[ctx.match[1]].flag]
-
-        ctx.session.userInfo.settings.locale = ctx.match[1]
-        ctx.i18n.locale(ctx.match[1])
-        await next(ctx)
-      }
+      ctx.session.userInfo.settings.locale = ctx.match[1]
+      ctx.i18n.locale(ctx.match[1])
+      ctx.state.sendHelp = true
+      await next(ctx)
     }
   } else {
     const button = []
@@ -53,7 +40,7 @@ const setLanguage = async (ctx, next) => {
       button.push(Markup.callbackButton(locales[key].flag, `set_language:${key}`))
     })
 
-    ctx.reply('🇷🇺 Выберите язык\n🇺🇸 Choose language\n\nHelp with translation: https://crwd.in/QuotLyBot', {
+    ctx.reply('🇷🇺 Выберите язык\n🇺🇸 Choose language\n\nHelp with translation: https://crwd.in/reacombot', {
       reply_markup: Markup.inlineKeyboard(button, {
         columns: 2
       })

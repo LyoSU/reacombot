@@ -11,6 +11,10 @@ const help = async ctx => {
 
 const composer = new Composer()
 
+composer.use(Composer.privateChat((ctx, next) => {
+  if (ctx.state.sendHelp) return help(ctx, next)
+  else return next()
+}))
 composer.on('message', Composer.privateChat(help))
 
 module.exports = composer

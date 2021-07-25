@@ -1,7 +1,7 @@
 module.exports = (bot) => {
   const handlers = [
-    'language',
     'channels',
+    'language',
     'help',
     'post',
     'rate',
