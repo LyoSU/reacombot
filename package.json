@@ -1,0 +1,39 @@
+{
+  "name": "reacombot",
+  "version": "0.0.1",
+  "description": "Telegram reacom bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LyoSU/reacombot.git"
+  },
+  "author": "LyoSU",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/LyoSU/reacombot/issues"
+  },
+  "homepage": "https://github.com/LyoSU/reacombot#readme",
+  "dependencies": {
+    "@pm2/io": "^4.3.5",
+    "dotenv": "^8.6.0",
+    "emoji-db": "^1.11.1",
+    "mongoose": "^5.13.2",
+    "tdl": "^7.0.0",
+    "tdl-tdlib-addon": "^1.0.1",
+    "telegraf": "^3.39.0",
+    "telegraf-i18n": "^6.6.0",
+    "telegraf-ratelimit": "^2.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-promise": "^4.3.1",
+    "eslint-plugin-standard": "^4.0.1"
+  }
+}
