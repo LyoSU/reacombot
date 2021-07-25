@@ -50,7 +50,7 @@ channels:
         <b>Отправить список клавиатуры:</b>
 
         Пример:
-        <pre>Мой сайт - https://lyo.su/ | Telegram - https://telegram. rg/
+        <pre>Мой сайт - https://lyo.su/ | Telegram - https://telegram.org/
         Dev блог - https://t.me/LyBlog</pre>
 
         Отправить любой текст для удаления.
@@ -62,7 +62,11 @@ rate:
     rated: |
       Вы ${rateName} это
     back: |
-      Вы вернули свой голос
+      You took your reaction back
+    rated_limit: |
+      \n${rateName} — ${voteCount}
+
+      The post counter will be updated later
 wait: |
   🕒 Комментарии будут размещены здесь в ближайшее время...
 
