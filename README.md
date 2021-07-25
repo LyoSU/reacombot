@@ -1,3 +1,3 @@
-# reactLyBot
+# reacombot
 
-[![time tracker](https://wakatime.com/badge/github/LyoSU/reactLyBot.svg)](https://wakatime.com/badge/github/LyoSU/reactLyBot)
+[![time tracker](https://wakatime.com/badge/github/LyoSU/reacombot.svg)](https://wakatime.com/badge/github/LyoSU/reacombot)
