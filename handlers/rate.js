@@ -58,7 +58,7 @@ composer.action(/^(rate):(.*)/, async ctx => {
 
   if (editReaction.error && editReaction.error.parameters.retry_after) {
     ctx.state.answerCbQuery = [resultText + ctx.i18n.t('rate.vote.rated_limit', { rateName, voteCount }), true]
-  } else {
+  } else if (editReaction.error) {
     console.error(editReaction.error)
   }
 })
