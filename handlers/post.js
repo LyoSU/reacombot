@@ -54,12 +54,29 @@ composer.on('channel_post', async (ctx, next) => {
 
   votesKeyboardArray.push({
     text: '💬 🕒',
-    url: `https://t.me/c/${ctx.channelPost.chat.id.toString().substr(4)}/${ctx.session.channelInfo.settings.showStart === 'top' ? 1 : 1000000}?thread=${ctx.channelPost.message_id}`
+    callback_data: 'post:wait'
   })
 
-  await ctx.tg.editMessageReplyMarkup(ctx.channelPost.chat.id, ctx.channelPost.message_id, null, {
+  const editMessage = await ctx.tg.editMessageReplyMarkup(ctx.channelPost.chat.id, ctx.channelPost.message_id, null, {
     inline_keyboard: [votesKeyboardArray].concat(post.keyboard)
-  })
+  }).catch(error => { return { error } })
+
+  if (editMessage.error && !ctx.channelPost.forward_from_message_id) {
+    for (const admin of chatAdministrators) {
+      const adminUser = await ctx.db.User.findOne({ telegramId: admin.user.id })
+
+      if (adminUser) {
+        ctx.i18n.locale(adminUser.settings.locale)
+        await ctx.tg.sendMessage(admin.user.id, ctx.i18n.t('error.cant_edited'), {
+          parse_mode: 'HTML'
+        }).catch(() => {})
+      }
+    }
+  }
+})
+
+composer.action('post:wait', async (ctx, next) => {
+  ctx.state.answerCbQuery = [ctx.i18n.t('wait'), true]
 })
 
 composer.on('message', async (ctx, next) => {
