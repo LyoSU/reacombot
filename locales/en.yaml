@@ -10,30 +10,24 @@ help: |
   <b>• Do you like the bot?</b> You can help him at this link: donate.lyo.su
 
   🧑‍💻 Follow the developer: @LyBlog (Only in Russian)
-
 menu:
-  channels: 📣 My channels
-
+  channels: '📣 My channels'
 channels:
   select: |
     Select channel:
-
   not_found: |
     <b>😞 You have not added the bot to any of the channels yet</b>
 
     If you are sure that you did this, try to make sure that i have permission to edit messages and send any post to the channel.
-
   control:
     info: |
       Channel selected: <b>${channel.title}</b>
 
       • What do you want to change?
-
     menu:
-      emoji: ${channel.settings.emojis} Emojis
-      type: 💬 When to add?
-      links: 🔗 Links keyboard
-
+      emoji: '${channel.settings.emojis} Emojis'
+      type: '💬 When to add?'
+      links: '🔗 Links keyboard'
     types:
       info: |
         <b>Choose when the bot can attach reactions to messages:</b>
@@ -41,19 +35,16 @@ channels:
         • Always: Reactions will be attached to every post whenever possible
         • One time: Reactions will only be attached to one new post on the channel. Then this setting will change to "never" and you will need to change it again here
         • Never: Bot will never attach reactions to your posts
-
       menu:
         always: Always
         one: One time
         never: Never
-
     emojis:
       send_emoji: |
         <b>Send one or more emojis:</b>
 
         Current: <code>${channel.settings.emojis}</code>
         One emoji — one button
-
     links:
       send_links: |
         <b>Send keyboard list:</b>
@@ -65,9 +56,7 @@ channels:
         Send any text to delete.
 
         <i>The current buttons will be displayed below</i>
-
       success: Keyboard changed!
-
 rate:
   vote:
     rated: |
