@@ -64,9 +64,9 @@ rate:
     back: |
       You took your reaction back
     rated_limit: |
-      \n${rateName} — ${voteCount}
+      ${rateName} — ${voteCount}
 
-      The post counter will be updated later
+      Counters in the post will be updated soon.
 wait: |
   🕒 Комментарии будут размещены здесь в ближайшее время...
 
