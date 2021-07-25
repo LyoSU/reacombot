@@ -4,7 +4,8 @@ module.exports = (bot) => {
     'channels',
     'help',
     'post',
-    'rate'
+    'rate',
+    'counter'
   ]
 
   handlers.forEach((handler) => {

@@ -1,4 +1,5 @@
 const Stage = require('telegraf/stage')
+const { match } = require('telegraf-i18n')
 
 module.exports = (...stages) => {
   const stage = new Stage([].concat(...stages))
@@ -14,7 +15,8 @@ module.exports = (...stages) => {
     return next()
   }
 
-  stage.command(['q', 'help', 'start', 'main', 'cancel', 'admin'], cancel)
+  stage.command(['help', 'start', 'channels', 'cancel', match('menu.channels')], cancel)
+  stage.hears(match('menu.channels'), cancel)
 
   return stage
 }

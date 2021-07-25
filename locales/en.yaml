@@ -12,7 +12,7 @@ help: |
   🧑‍💻 Follow the developer: @LyBlog (Only in Russian)
 
 menu:
-  channel: 📣 My channels
+  channels: 📣 My channels
 
 channels:
   select: |
@@ -31,8 +31,8 @@ channels:
 
     menu:
       emoji: ${channel.settings.emojis} Emojis
-      type: |
-        💬 When to add?
+      type: 💬 When to add?
+      links: 🔗 Links keyboard
 
     types:
       info: |
@@ -53,6 +53,20 @@ channels:
 
         Current: <code>${channel.settings.emojis}</code>
         One emoji — one button
+
+    links:
+      send_links: |
+        <b>Send keyboard list:</b>
+
+        Example:
+        <pre>My site - https://lyo.su/ | Telegram - https://telegram.org/
+        Dev blog - https://t.me/LyBlog</pre>
+
+        Send any text to delete.
+
+        <i>The current buttons will be displayed below</i>
+
+      success: Keyboard changed!
 
 rate:
   vote:

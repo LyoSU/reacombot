@@ -44,12 +44,12 @@ composer.action(/^(rate):(.*)/, async ctx => {
   })
 
   votesKeyboardArray.push({
-    text: '💬',
+    text: `💬 ${post.commentsCount > 0 ? post.commentsCount : ''}`,
     url: `https://t.me/c/${post.channel.groupId.toString().substr(4)}/${post.channel.settings.showStart === 'top' ? 1 : 1000000}?thread=${post.groupMessageId}`
   })
 
   await ctx.editMessageReplyMarkup({
-    inline_keyboard: [votesKeyboardArray]
+    inline_keyboard: [votesKeyboardArray].concat(post.keyboard)
   }).catch(console.error)
 })
 

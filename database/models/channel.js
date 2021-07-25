@@ -26,7 +26,8 @@ const schema = Schema({
       type: String,
       enum: ['top', 'bottom'],
       default: 'bottom'
-    }
+    },
+    keyboard: Array
   },
   administrators: [{
     user: {

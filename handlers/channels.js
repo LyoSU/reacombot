@@ -18,7 +18,8 @@ channelControl.enter(async ctx => {
 
   const inlineKeyboard = [
     [
-      Markup.callbackButton(ctx.i18n.t('channels.control.menu.emoji', { channel }), `channel:${channel.id}:emoji`)
+      Markup.callbackButton(ctx.i18n.t('channels.control.menu.emoji', { channel }), `channel:${channel.id}:emoji`),
+      Markup.callbackButton(ctx.i18n.t('channels.control.menu.links', { channel }), `channel:${channel.id}:links`)
     ],
     [
       Markup.callbackButton(ctx.i18n.t('channels.control.menu.type'), `channel:${channel.id}:type:0`)
@@ -69,13 +70,63 @@ setChannelEmoji.on('text', async ctx => {
   })
 })
 
+const setChannelLinks = new Scene('setChannelLinks')
+
+setChannelLinks.enter(async ctx => {
+  const channel = await ctx.db.Channel.findById(ctx.scene.state.channelId)
+
+  await ctx.editMessageText(ctx.i18n.t('channels.control.links.send_links'), {
+    reply_markup: Markup.inlineKeyboard(channel.settings.keyboard),
+    parse_mode: 'HTML',
+    disable_web_page_preview: true
+  })
+})
+
+setChannelLinks.on('text', async ctx => {
+  const channel = await ctx.db.Channel.findById(ctx.scene.state.channelId)
+
+  const inlineKeyboard = []
+
+  ctx.message.text.split('\n').forEach((line) => {
+    const linelButton = []
+
+    line.split('|').forEach((row) => {
+      const data = row.split(' - ')
+      if (data[0] && data[1]) {
+        const name = data[0].trim()
+        const url = data[1].trim()
+
+        linelButton.push(Markup.urlButton(name, url))
+      }
+    })
+
+    inlineKeyboard.push(linelButton)
+  })
+
+  channel.settings.keyboard = inlineKeyboard
+  await channel.save()
+
+  await ctx.replyWithHTML(ctx.i18n.t('channels.control.links.success'))
+
+  return ctx.scene.enter(channelControl.id, {
+    channelId: ctx.scene.state.channelId
+  })
+})
+
 composer.use(scenes(
   channelControl,
-  setChannelEmoji
+  setChannelEmoji,
+  setChannelLinks
 ))
 
 composer.action(/channel:(.*):emoji/, async ctx => {
   return ctx.scene.enter(setChannelEmoji.id, {
+    channelId: ctx.match[1]
+  })
+})
+
+composer.action(/channel:(.*):links/, async ctx => {
+  return ctx.scene.enter(setChannelLinks.id, {
     channelId: ctx.match[1]
   })
 })
@@ -116,15 +167,17 @@ const channels = async ctx => {
   const inlineKeyboard = []
 
   channels.forEach(channel => {
-    inlineKeyboard.push([Markup.callbackButton(channel.title, `channel:${channel.id}`)])
+    inlineKeyboard.push(Markup.callbackButton(channel.title, `channel:${channel.id}`))
   })
 
   await ctx.replyWithHTML(ctx.i18n.t('channels.select'), {
-    reply_markup: Markup.inlineKeyboard(inlineKeyboard)
+    reply_markup: Markup.inlineKeyboard(inlineKeyboard, {
+      columns: 2
+    })
   })
 }
 
-composer.hears(match('menu.channel'), Composer.privateChat(channels))
+composer.hears(match('menu.channels'), Composer.privateChat(channels))
 composer.command('channels', Composer.privateChat(channels))
 
 module.exports = composer

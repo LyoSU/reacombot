@@ -48,6 +48,8 @@ composer.on('channel_post', async (ctx, next) => {
     votes: votesRateArray,
     score: 0
   }
+  post.keyboard = post.channel.settings.keyboard
+
   await post.save()
 
   votesKeyboardArray.push({
@@ -56,7 +58,7 @@ composer.on('channel_post', async (ctx, next) => {
   })
 
   await ctx.tg.editMessageReplyMarkup(ctx.channelPost.chat.id, ctx.channelPost.message_id, null, {
-    inline_keyboard: [votesKeyboardArray]
+    inline_keyboard: [votesKeyboardArray].concat(post.keyboard)
   })
 })
 
@@ -69,8 +71,10 @@ composer.on('message', async (ctx, next) => {
     post.groupMessageId = ctx.message.message_id
     await post.save()
 
-    post.channel.groupId = ctx.message.chat.id
-    await post.channel.save()
+    if (post.channel.groupId !== ctx.message.chat.id) {
+      post.channel.groupId = ctx.message.chat.id
+      await post.channel.save()
+    }
 
     const votesKeyboardArray = []
 
@@ -87,8 +91,10 @@ composer.on('message', async (ctx, next) => {
     })
 
     await ctx.tg.editMessageReplyMarkup(ctx.message.forward_from_chat.id, ctx.message.forward_from_message_id, null, {
-      inline_keyboard: [votesKeyboardArray]
+      inline_keyboard: [votesKeyboardArray].concat(post.keyboard)
     })
+  } else {
+    return next()
   }
 })
 

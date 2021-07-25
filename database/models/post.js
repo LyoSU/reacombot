@@ -27,6 +27,11 @@ const schema = Schema({
       type: Number,
       index: true
     }
+  },
+  keyboard: Array,
+  commentsCount: {
+    type: Number,
+    default: 0
   }
 }, {
   timestamps: true
