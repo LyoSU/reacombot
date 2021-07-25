@@ -60,7 +60,7 @@ bot.use((ctx, next) => {
 })
 
 bot.use(rateLimit({
-  window: 300,
+  window: 150,
   limit: 1
 }))
 
