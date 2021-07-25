@@ -79,7 +79,7 @@ bot.use(session({
       return `${ctx.from.id}:${ctx.chat.id}`
     } else if (ctx.from && ctx.inlineQuery) {
       return `${ctx.from.id}:${ctx.from.id}`
-    } else if (ctx.chat.type === 'channel') {
+    } else if (ctx.chat && ctx.chat.type === 'channel') {
       return `channel:${ctx.chat.id}`
     }
     return null
