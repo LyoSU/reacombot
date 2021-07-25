@@ -5,6 +5,7 @@ const composer = new Composer()
 composer.action(/^(rate):(.*)/, async ctx => {
   let resultText = ''
   const rateName = ctx.match[2]
+  let voteCount = 0
 
   const { message } = ctx.callbackQuery
 
@@ -23,6 +24,7 @@ composer.action(/^(rate):(.*)/, async ctx => {
         resultText = ctx.i18n.t('rate.vote.rated', { rateName, me: ctx.me })
         rate.vote.push(ctx.from.id)
       }
+      voteCount = rate.vote.length
     }
   })
 
@@ -48,9 +50,17 @@ composer.action(/^(rate):(.*)/, async ctx => {
     url: `https://t.me/c/${post.channel.groupId.toString().substr(4)}/${post.channel.settings.showStart === 'top' ? 1 : 1000000}?thread=${post.groupMessageId}`
   })
 
-  await ctx.editMessageReplyMarkup({
+  const editReaction = await ctx.editMessageReplyMarkup({
     inline_keyboard: [votesKeyboardArray].concat(post.keyboard)
-  }).catch(console.error)
+  }).catch(error => {
+    return { error }
+  })
+
+  if (editReaction.error && editReaction.error.parameters.retry_after) {
+    ctx.state.answerCbQuery = [resultText + ctx.i18n.t('rate.vote.rated_limit', { rateName, voteCount }), true]
+  } else {
+    console.error(editReaction.error)
+  }
 })
 
 module.exports = composer

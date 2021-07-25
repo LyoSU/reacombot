@@ -62,7 +62,11 @@ rate:
     rated: |
       You ${rateName} this
     back: |
-      You got your vote back
+      You took your reaction back
+    rated_limit: |
+       \n${rateName} — ${voteCount}
+
+       The post counter will be updated later
 wait: |
   🕒 Comments will be posted here soon...
 
