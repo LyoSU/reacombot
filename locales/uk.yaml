@@ -63,3 +63,12 @@ rate:
       Ви ${rateName} це
     back: |
       Ви повернули свій голос назад
+wait: |
+  🕒 Comments will be posted here soon...
+
+  If this did not happen for a long time, most likely the bot was not added to the attached group.
+error:
+  cant_edited: |
+    <b>😓 Failed to add reactions to the last post</b>
+
+    I may not have permission to edit posts.
