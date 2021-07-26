@@ -5,7 +5,6 @@ const composer = new Composer()
 composer.action(/^(rate):(.*)/, async ctx => {
   let resultText = ''
   const rateName = ctx.match[2]
-  let voteCount = 0
 
   const { message } = ctx.callbackQuery
 
@@ -13,7 +12,7 @@ composer.action(/^(rate):(.*)/, async ctx => {
 
   if (!post) return
 
-  post.rate.votes.map((rate) => {
+  post.rate.votes.map(rate => {
     const indexRate = rate.vote.indexOf(ctx.from.id)
 
     if (indexRate > -1) rate.vote.splice(indexRate, 1)
@@ -24,7 +23,6 @@ composer.action(/^(rate):(.*)/, async ctx => {
         resultText = ctx.i18n.t('rate.vote.rated', { rateName, me: ctx.me })
         rate.vote.push(ctx.from.id)
       }
-      voteCount = rate.vote.length
     }
   })
 
@@ -57,7 +55,11 @@ composer.action(/^(rate):(.*)/, async ctx => {
   })
 
   if (editReaction.error && editReaction.error.parameters.retry_after) {
-    ctx.state.answerCbQuery = [resultText + ctx.i18n.t('rate.vote.rated_limit', { rateName, voteCount }), true]
+    const reactListArray = post.rate.votes.map(rate => {
+      return `${rate.name} — ${rate.vote.length}`
+    })
+
+    ctx.state.answerCbQuery = [resultText + ctx.i18n.t('rate.vote.rated_limit', { rateName, reactList: reactListArray.join('\n') }), true]
   } else if (editReaction.error) {
     console.error(editReaction.error)
   }

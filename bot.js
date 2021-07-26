@@ -94,8 +94,8 @@ bot.use(async (ctx, next) => {
     ctx.state.answerCbQuery = []
   }
   return next(ctx).then(() => {
-    if (ctx.session.userInfo) ctx.session.userInfo.save()
-    if (ctx.session.channelInfo) ctx.session.channelInfo.save()
+    if (ctx.session && ctx.session.userInfo) ctx.session.userInfo.save()
+    if (ctx.session && ctx.session.channelInfo) ctx.session.channelInfo.save()
     if (ctx.callbackQuery) return ctx.answerCbQuery(...ctx.state.answerCbQuery)
   })
 })
