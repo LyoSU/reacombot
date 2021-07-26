@@ -64,7 +64,7 @@ rate:
     back: |
       You took your reaction back
     rated_limit: |
-      ${rateName} — ${voteCount}
+      ${reactList}
 
       Counters in the post will be updated soon.
 wait: |
