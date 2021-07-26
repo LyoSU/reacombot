@@ -8,7 +8,6 @@ const schema = Schema({
   },
   channelMessageId: {
     type: Number,
-    unique: true,
     required: true
   },
   groupMessageId: {
