@@ -1,0 +1,78 @@
+---
+language_name: '🇺🇸 English'
+help: |
+  <b>Hey! 👋</b>
+  I will add <u>reactions</u> to your posts on the channel along with <u>native comments</u>. It's enough just to add me to your channel, give me permission to edit messages, and also add me to the group that is tied to the channel.
+
+  • If you do not want me to change all messages or want to change emoji, then click the buttons below or send the command /channels to configure. <i>To display a channel in the list, you must first write any post.</i>
+
+  <b>• Need help or have a suggestion?</b> Write to me: @Ly_OBot. Please write immediately what you are talking about and use English or Russian.
+  <b>• Do you like the bot?</b> You can help him at this link: donate.lyo.su
+
+  🧑‍💻 Follow the developer: @LyBlog (Only in Russian)
+menu:
+  channels: '📣 My channels'
+channels:
+  select: |
+    Select channel:
+  not_found: |
+    <b>😞 You have not added the bot to any of the channels yet</b>
+
+    If you are sure that you did this, try to make sure that i have permission to edit messages and send any post to the channel.
+  control:
+    info: |
+      Channel selected: <b>${channel.title}</b>
+
+      • What do you want to change?
+    menu:
+      emoji: '${channel.settings.emojis} Emojis'
+      type: '💬 When to add?'
+      links: '🔗 Links keyboard'
+    types:
+      info: |
+        <b>Choose when the bot can attach reactions to messages:</b>
+
+        • Always: Reactions will be attached to every post whenever possible
+        • One time: Reactions will only be attached to one new post on the channel. Then this setting will change to "never" and you will need to change it again here
+        • Never: Bot will never attach reactions to your posts
+      menu:
+        always: Always
+        one: One time
+        never: Never
+    emojis:
+      send_emoji: |
+        <b>Send one or more emojis:</b>
+
+        Current: <code>${channel.settings.emojis}</code>
+        One emoji — one button
+    links:
+      send_links: |
+        <b>Send keyboard list:</b>
+
+        Example:
+        <pre>My site - https://lyo.su/ | Telegram - https://telegram.org/
+        Dev blog - https://t.me/LyBlog</pre>
+
+        Send any text to delete.
+
+        <i>The current buttons will be displayed below</i>
+      success: Keyboard changed!
+rate:
+  vote:
+    rated: |
+      You ${rateName} this
+    back: |
+      You took your reaction back
+    rated_limit: |
+      ${reactList}
+
+      Counters in the post will be updated soon.
+wait: |
+  🕒 Comments will be posted here soon...
+
+  If this did not happen for a long time, most likely the bot was not added to the attached group.
+error:
+  cant_edited: |
+    <b>😓 Failed to add reactions to the last post</b>
+
+    I may not have permission to edit posts.
