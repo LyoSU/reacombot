@@ -8,7 +8,8 @@ composer.action(/^(rate):(.*)/, async ctx => {
 
   const { message } = ctx.callbackQuery
 
-  const post = await ctx.db.Post.findOne({ channelMessageId: message.message_id }).populate('channel')
+  const channel = await ctx.db.Channel.findOne({ channelId: message.chat.id })
+  const post = await ctx.db.Post.findOne({ channel, channelMessageId: message.message_id })
 
   if (!post) return
 
@@ -45,7 +46,7 @@ composer.action(/^(rate):(.*)/, async ctx => {
 
   votesKeyboardArray.push({
     text: `💬 ${post.commentsCount > 0 ? post.commentsCount : ''}`,
-    url: `https://t.me/c/${post.channel.groupId.toString().substr(4)}/${post.channel.settings.showStart === 'top' ? 1 : 1000000}?thread=${post.groupMessageId}`
+    url: `https://t.me/c/${channel.groupId.toString().substr(4)}/${channel.settings.showStart === 'top' ? 1 : 1000000}?thread=${post.groupMessageId}`
   })
 
   const editReaction = await ctx.editMessageReplyMarkup({
