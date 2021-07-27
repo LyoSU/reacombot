@@ -81,16 +81,17 @@ composer.action('post:wait', async (ctx, next) => {
 
 composer.on('message', async (ctx, next) => {
   if (ctx.from.id === 777000 && ctx.message.forward_from_message_id) {
-    const post = await ctx.db.Post.findOne({ channelMessageId: ctx.message.forward_from_message_id }).populate('channel')
+    const channel = await ctx.db.Channel.findOne({ channelId: ctx.message.forward_from_chat.id })
+    const post = await ctx.db.Post.findOne({ channel, channelMessageId: ctx.message.forward_from_message_id })
 
     if (!post) return next()
 
     post.groupMessageId = ctx.message.message_id
     await post.save()
 
-    if (post.channel.groupId !== ctx.message.chat.id) {
-      post.channel.groupId = ctx.message.chat.id
-      await post.channel.save()
+    if (channel.groupId !== ctx.message.chat.id) {
+      channel.groupId = ctx.message.chat.id
+      await channel.save()
     }
 
     const votesKeyboardArray = []
@@ -104,7 +105,7 @@ composer.on('message', async (ctx, next) => {
 
     votesKeyboardArray.push({
       text: '💬',
-      url: `https://t.me/c/${ctx.message.chat.id.toString().substr(4)}/${post.channel.settings.showStart === 'top' ? 1 : 1000000}?thread=${ctx.message.message_id}`
+      url: `https://t.me/c/${ctx.message.chat.id.toString().substr(4)}/${channel.settings.showStart === 'top' ? 1 : 1000000}?thread=${ctx.message.message_id}`
     })
 
     await ctx.tg.editMessageReplyMarkup(ctx.message.forward_from_chat.id, ctx.message.forward_from_message_id, null, {
