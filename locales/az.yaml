@@ -1,78 +1,79 @@
 ---
 language_name: '🇦🇿 Azərbaycanca'
 help: |
-  <b>Hey! 👋</b>
-  I will add <u>reactions</u> to your posts on the channel along with <u>native comments</u>. It's enough just to add me to your channel, give me permission to edit messages, and also add me to the group that is tied to the channel.
+  <b>Salam! 👋</b>
+  Kanaldakı yazılarınıza <u>reaksiyaları yozumla</u> əlavə edəcəm. Sadəcə məni kanalınıza əlavə etmək, mesajları "edit" etmək üçün icazə vermək və eyni zamanda kanala bağlı qrupa əlavə etmək kifayətdir.
 
-  • If you do not want me to change all messages or want to change emoji, then click the buttons below or send the command /channels to configure. <i>To display a channel in the list, you must first write any post.</i>
+  • Bütün mesajları dəyişdirməyimi istəmirsinizsə və ya emoji dəyişdirmək istəmirsinizsə, aşağıdakı düymələri vurun və ya konfiqurasiya etmək üçün /channels əmri göndərin. <i>Bir kanalı siyahıda göstərmək üçün əvvəlcə hər hansı bir yazı yazmalısınız.</i>
 
-  <b>• Need help or have a suggestion?</b> Write to me: @Ly_OBot. Please write immediately what you are talking about and use English or Russian.
-  <b>• Do you like the bot?</b> You can help him at this link: donate.lyo.su
+  <b>• Yardıma ehtiyacınız var və ya təklifiniz var?</b> Mənə yazın: @Ly_OBot. Xahiş edirəm sualları dərhal yazın və ingiliscə və ya rusca yazın.
+  <b>• Botu bəyənirsiniz?</b> Ona bu linkdən kömək edə bilərsiniz: donate.lyo.su
 
-  🧑‍💻 Follow the developer: @LyBlog (Only in Russian)
+  🧑‍💻 Geliştiricini izləyin: @LyBlog (Yalnız rus dilində)
+  👀 Tərcüməçi: @Sadykhzadeh
 menu:
-  channels: '📣 My channels'
+  channels: '📣 Kanallarım'
 channels:
   select: |
-    Select channel:
+    Kanalı seçin:
   not_found: |
-    <b>😞 You have not added the bot to any of the channels yet</b>
+    <b>😞 Botu hələ ki heç bir kanala əlavə etməmisiniz</b>
 
-    If you are sure that you did this, try to make sure that i have permission to edit messages and send any post to the channel.
+    Bunu etdiyinizə əminsinizsə, mesajları "edit" etmək və kanala hər hansı bir yazı göndərmək üçün icazəmin olmasına əmin olun.
   control:
     info: |
-      Channel selected: <b>${channel.title}</b>
+      Kanal seçildi: <b>${channel.title}</b>
 
-      • What do you want to change?
+      • Nəyi dəyişdirmək istəyirsiniz?
     menu:
-      emoji: '${channel.settings.emojis} Emojis'
-      type: '💬 When to add?'
-      links: '🔗 Links keyboard'
+      emoji: '${channel.settings.emojis} emoji'
+      type: '💬 Nə vaxt əlavə etmək lazımdır?'
+      links: '🔗 İstinad klaviaturası'
     types:
       info: |
-        <b>Choose when the bot can attach reactions to messages:</b>
+        <b>Botun mesajlara reaksiyalarını nə vaxt əlavə edə biləcəyini seçin:</b>
 
-        • Always: Reactions will be attached to every post whenever possible
-        • One time: Reactions will only be attached to one new post on the channel. Then this setting will change to "never" and you will need to change it again here
-        • Never: Bot will never attach reactions to your posts
+        • Həmişə: Reaksiyalar mümkün olduqda hər yazıya əlavə olunacaq
+        • Bir dəfə: Reaksiyalar yalnız kanaldakı yeni bir yazıya əlavə olunacaq. Sonra bu ayar "heç vaxt" olaraq dəyişəcək və yenidən burada dəyişdirməlisiniz
+        • Heç vaxt: Bot heç vaxt yazılarınıza reaksiyalar əlavə etməyəcək
       menu:
-        always: Always
-        one: One time
-        never: Never
+        always: Həmişə
+        one: Bir dəfəlik
+        never: Heç vaxt
     emojis:
       send_emoji: |
-        <b>Send one or more emojis:</b>
+        <b>Bir və ya daha çox emoji göndərin:</b>
 
-        Current: <code>${channel.settings.emojis}</code>
-        One emoji — one button
+        Cari: <code>${channel.settings.emojis}</code>
+        Bir emoji - bir düymə
     links:
       send_links: |
-        <b>Send keyboard list:</b>
+        <b>Klaviatura siyahısını göndərin:</b>
 
-        Example:
-        <pre>My site - https://lyo.su/ | Telegram - https://telegram.org/
+        Nümunə:
+        <pre>Saytım - https://lyo.su/ | Telegram - https://telegram.org/
         Dev blog - https://t.me/LyBlog</pre>
 
-        Send any text to delete.
+        Silmək üçün istənilən mətni göndərin.
 
-        <i>The current buttons will be displayed below</i>
-      success: Keyboard changed!
+        <i>Hazırkı düymələr aşağıda ğöstəriləcək</i>
+      success: Klaviatura dəyişdirildi!
 rate:
   vote:
     rated: |
-      You ${rateName} this
+      Sən bunu ${rateName}
     back: |
-      You took your reaction back
+      Reaksiyanı gaytardın
     rated_limit: |
       ${reactList}
 
-      Counters in the post will be updated soon.
+      Yazıdakı sayğaclar tezliklə yenilənəcək.
 wait: |
-  🕒 Comments will be posted here soon...
+  🕒 Şərhlər tezliklə burada yerləşdiriləcək...
 
-  If this did not happen for a long time, most likely the bot was not added to the attached group.
+  Bu uzun müddət baş verməsəydi, böyük ehtimalla bot əlavə olunmuş qrupa əlavə edilmədi.
 error:
   cant_edited: |
-    <b>😓 Failed to add reactions to the last post</b>
+    <b>😓 Son yazıya reaksiya əlavə etmək alınmadı</b>
 
-    I may not have permission to edit posts.
+    Yazıları redaktə etmək üçün icazəm olmaya bilər.

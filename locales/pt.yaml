@@ -1,0 +1,78 @@
+---
+language_name: '🇧🇷 Português'
+help: |
+  <b>Ei! 👋</b>
+  Vou adicionar <u>reações</u> às suas postagens no canal juntamente com <u>comentários nativos</u>. Basta me adicionar ao seu canal. Dê-me permissão para editar mensagens e também me adicione ao grupo que está vinculado ao canal.
+
+  • Se você não quer que eu altere todas as mensagens ou queira alterar os emojis, clique nos botões abaixo ou envie o comando /channels para configurar. <i>Para exibir um canal na lista, você precisa primeiro publicar alguma postagem.</i>
+
+  <b>• Precisa de ajuda ou tem uma sugestão?</b> Escreva-me: @Ly_OBot. Por favor, seja direto e use inglês ou russo.
+  <b>• Você gosta do bot?</b> Você pode ajudá-lo neste link: donate.lyo.su
+
+  🧑‍💻 Siga o desenvolvedor: @LyBlog (Em Russo)
+menu:
+  channels: '📣 Meus canais'
+channels:
+  select: |
+    Escolha um canal:
+  not_found: |
+    <b>😞 Você ainda não adicionou o bot a nenhum dos canais</b>
+
+    Se tem certeza de que fez isso, verifique se eu tenho permissão para editar mensagens e enviar qualquer postagem para o canal.
+  control:
+    info: |
+      Canal selecionado: <b>${channel.title}</b>
+
+      • O que deseja alterar?
+    menu:
+      emoji: '${channel.settings.emojis} Emojis'
+      type: '💬 Quando adicionar?'
+      links: '🔗 Botões de links'
+    types:
+      info: |
+        <b>Escolha quando o bot irá anexar reações às mensagens:</b>
+
+        • Sempre: Reações serão anexadas a cada postagem sempre que possível
+        • Uma vez: Reações só serão anexadas a uma nova postagem no canal. Depois disso, esta configuração mudará para "nunca" e você precisará alterá-la novamente aqui.
+        • Nunca: O bot nunca anexará reações às suas postagens
+      menu:
+        always: Sempre
+        one: Uma vez
+        never: Nunca
+    emojis:
+      send_emoji: |
+        <b>Envie um ou mais emojis:</b>
+
+        Atual: <code>${channel.settings.emojis}</code>
+        Um emoji = um botão
+    links:
+      send_links: |
+        <b>Enviar lista de botões:</b>
+
+        Exemplo:
+        <pre>Meu site - https://lyo.su/ | Telegram - https://telegram. rg/
+        Blog do desenvolvedor - https://t.me/LyBlog</pre>
+
+        Envie qualquer texto para excluir.
+
+        <i>Os botões atuais serão exibidos abaixo</i>
+      success: Botões alterados!
+rate:
+  vote:
+    rated: |
+      Você ${rateName} isso
+    back: |
+      Você tirou sua reação
+    rated_limit: |
+      ${reactList}
+
+      Os contadores na postagem serão atualizados em breve.
+wait: |
+  🕒 Os comentários serão postados aqui em breve...
+
+  Se demorar muito, provavelmente o bot não foi adicionado ao grupo vinculado.
+error:
+  cant_edited: |
+    <b>😓 Falha ao adicionar reações à última postagem</b>
+
+    Talvez eu não tenha permissão para editar as postagens.
