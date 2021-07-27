@@ -9,7 +9,7 @@ help: |
   <b>• Precisa de ajuda ou tem uma sugestão?</b> Escreva-me: @Ly_OBot. Por favor, seja direto e use inglês ou russo.
   <b>• Você gosta do bot?</b> Você pode ajudá-lo neste link: donate.lyo.su
 
-  🧑💻 Siga o desenvolvedor: @LyBlog (Em Russo)
+  🧑‍💻 Siga o desenvolvedor: @LyBlog (Em Russo)
 menu:
   channels: '📣 Meus canais'
 channels:
@@ -30,37 +30,37 @@ channels:
       links: '🔗 Botões de links'
     types:
       info: |
-        <b>Choose when the bot can attach reactions to messages:</b>
+        <b>Escolha quando o bot irá anexar reações às mensagens:</b>
 
-        • Always: Reactions will be attached to every post whenever possible
-        • One time: Reactions will only be attached to one new post on the channel. Then this setting will change to "never" and you will need to change it again here
-        • Never: Bot will never attach reactions to your posts
+        • Sempre: Reações serão anexadas a cada postagem sempre que possível
+        • Uma vez: Reações só serão anexadas a uma nova postagem no canal. Depois disso, esta configuração mudará para "nunca" e você precisará alterá-la novamente aqui.
+        • Nunca: O bot nunca anexará reações às suas postagens
       menu:
-        always: Always
-        one: One time
-        never: Never
+        always: Sempre
+        one: Uma vez
+        never: Nunca
     emojis:
       send_emoji: |
-        <b>Send one or more emojis:</b>
+        <b>Envie um ou mais emojis:</b>
 
-        Current: <code>${channel.settings.emojis}</code>
-        One emoji — one button
+        Atual: <code>${channel.settings.emojis}</code>
+        Um emoji = um botão
     links:
       send_links: |
-        <b>Send keyboard list:</b>
+        <b>Enviar lista de botões:</b>
 
-        Example:
-        <pre>My site - https://lyo.su/ | Telegram - https://telegram.org/
-        Dev blog - https://t.me/LyBlog</pre>
+        Exemplo:
+        <pre>Meu site - https://lyo.su/ | Telegram - https://telegram. rg/
+        Blog do desenvolvedor - https://t.me/LyBlog</pre>
 
-        Send any text to delete.
+        Envie qualquer texto para excluir.
 
-        <i>The current buttons will be displayed below</i>
-      success: Keyboard changed!
+        <i>Os botões atuais serão exibidos abaixo</i>
+      success: Botões alterados!
 rate:
   vote:
     rated: |
-      You ${rateName} this
+      + ${rateName}
     back: |
       You took your reaction back
     rated_limit: |
