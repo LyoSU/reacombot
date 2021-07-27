@@ -60,19 +60,19 @@ channels:
 rate:
   vote:
     rated: |
-      + ${rateName}
+      Você ${rateName} isso
     back: |
-      You took your reaction back
+      Você tirou sua reação
     rated_limit: |
       ${reactList}
 
-      Counters in the post will be updated soon.
+      Os contadores na postagem serão atualizados em breve.
 wait: |
-  🕒 Comments will be posted here soon...
+  🕒 Os comentários serão postados aqui em breve...
 
-  If this did not happen for a long time, most likely the bot was not added to the attached group.
+  Se demorar muito, provavelmente o bot não foi adicionado ao grupo vinculado.
 error:
   cant_edited: |
-    <b>😓 Failed to add reactions to the last post</b>
+    <b>😓 Falha ao adicionar reações à última postagem</b>
 
-    I may not have permission to edit posts.
+    Talvez eu não tenha permissão para editar as postagens.
