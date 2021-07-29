@@ -42,13 +42,14 @@ composer.action(/^(rate):(.*)/, rateLimit({
 
   const updateResult = await keyboardUpdate(channel.channelId, post.channelMessageId)
 
-  if (updateResult.edited === true) ctx.state.answerCbQuery = [resultText]
-  else {
+  if (updateResult.error && updateResult.error !== 'timeout') {
     const reactListArray = post.rate.votes.map(rate => {
       return `${rate.name} — ${rate.vote.length}`
     })
 
     ctx.state.answerCbQuery = [resultText + ctx.i18n.t('rate.vote.rated_limit', { rateName, reactList: reactListArray.join('\n') }), true]
+  } else {
+    ctx.state.answerCbQuery = [resultText]
   }
 })
 
