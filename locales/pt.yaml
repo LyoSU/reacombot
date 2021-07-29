@@ -26,19 +26,35 @@ channels:
       • O que deseja alterar?
     menu:
       emoji: '${channel.settings.emojis} Emojis'
-      type: '💬 Quando adicionar?'
+      type: '✍️ When to add?'
+      comments_type: '💬 Comment button'
       links: '🔗 Botões de links'
+    no_available: |
+      The channel is no longer available.
     types:
       info: |
-        <b>Escolha quando o bot irá anexar reações às mensagens:</b>
+        <b>Choose when the bot can attach reactions to messages:</b>
 
-        • Sempre: Reações serão anexadas a cada postagem sempre que possível
-        • Uma vez: Reações só serão anexadas a uma nova postagem no canal. Depois disso, esta configuração mudará para "nunca" e você precisará alterá-la novamente aqui.
-        • Nunca: O bot nunca anexará reações às suas postagens
+        • Always: Reactions will be attached to every post whenever possible
+        • One time: Reactions will only be attached to one new post on the channel. Then this setting will change to "never" and you will need to change it again here
+        • Never: Bot will never attach reactions to your posts
+        • On request: Will add when the last line of the message starts with the ! and then there are emojis.
       menu:
         always: Sempre
         one: Uma vez
         never: Nunca
+        request: On request
+    comments_types:
+      info: |
+        <b>Choose where to display comments:</b>
+
+        • Always: The comment button will always be
+        • One time: Only the next post will have a button. Then this setting will change to "never" and you will need to change it again here
+        • Never: Don't show comment button
+      menu:
+        always: Always
+        one: One time
+        never: Never
     emojis:
       send_emoji: |
         <b>Envie um ou mais emojis:</b>
@@ -57,6 +73,7 @@ channels:
 
         <i>Os botões atuais serão exibidos abaixo</i>
       success: Botões alterados!
+  back: < Back
 rate:
   vote:
     rated: |

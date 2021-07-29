@@ -27,19 +27,35 @@ channels:
       • Nəyi dəyişdirmək istəyirsiniz?
     menu:
       emoji: '${channel.settings.emojis} emoji'
-      type: '💬 Nə vaxt əlavə etmək lazımdır?'
+      type: '✍️ When to add?'
+      comments_type: '💬 Comment button'
       links: '🔗 İstinad klaviaturası'
+    no_available: |
+      The channel is no longer available.
     types:
       info: |
-        <b>Botun mesajlara reaksiyalarını nə vaxt əlavə edə biləcəyini seçin:</b>
+        <b>Choose when the bot can attach reactions to messages:</b>
 
-        • Həmişə: Reaksiyalar mümkün olduqda hər yazıya əlavə olunacaq
-        • Bir dəfə: Reaksiyalar yalnız kanaldakı yeni bir yazıya əlavə olunacaq. Sonra bu ayar "heç vaxt" olaraq dəyişəcək və yenidən burada dəyişdirməlisiniz
-        • Heç vaxt: Bot heç vaxt yazılarınıza reaksiyalar əlavə etməyəcək
+        • Always: Reactions will be attached to every post whenever possible
+        • One time: Reactions will only be attached to one new post on the channel. Then this setting will change to "never" and you will need to change it again here
+        • Never: Bot will never attach reactions to your posts
+        • On request: Will add when the last line of the message starts with the ! and then there are emojis.
       menu:
         always: Həmişə
         one: Bir dəfəlik
         never: Heç vaxt
+        request: On request
+    comments_types:
+      info: |
+        <b>Choose where to display comments:</b>
+
+        • Always: The comment button will always be
+        • One time: Only the next post will have a button. Then this setting will change to "never" and you will need to change it again here
+        • Never: Don't show comment button
+      menu:
+        always: Always
+        one: One time
+        never: Never
     emojis:
       send_emoji: |
         <b>Bir və ya daha çox emoji göndərin:</b>
@@ -58,6 +74,7 @@ channels:
 
         <i>Hazırkı düymələr aşağıda ğöstəriləcək</i>
       success: Klaviatura dəyişdirildi!
+  back: < Back
 rate:
   vote:
     rated: |
