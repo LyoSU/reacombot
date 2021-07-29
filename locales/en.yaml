@@ -46,11 +46,11 @@ channels:
         request: On request
     comments_types:
       info: |
-          <b>Choose where to display comments:</b>
+        <b>Choose where to display comments:</b>
 
-          • Always: The comment button will always be
-          • One time: Only the next post will have a button. Then this setting will change to "never" and you will need to change it again here
-          • Never: Don't show comment button
+        • Always: The comment button will always be
+        • One time: Only the next post will have a button. Then this setting will change to "never" and you will need to change it again here
+        • Never: Don't show comment button
       menu:
         always: Always
         one: One time
