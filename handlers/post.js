@@ -60,7 +60,7 @@ composer.on('channel_post', async (ctx, next) => {
   }
 
   if (!emojis && ctx.session.channelInfo.settings.type === 'request') return next()
-  if (!emojis) emojiDb.searchFromText({ input: ctx.session.channelInfo.settings.emojis, fixCodePoints: true })
+  if (!emojis) emojis = emojiDb.searchFromText({ input: ctx.session.channelInfo.settings.emojis, fixCodePoints: true })
 
   emojis.forEach(data => {
     votesRateArray.push({
