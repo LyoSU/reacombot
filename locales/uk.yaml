@@ -26,19 +26,35 @@ channels:
       • Що ви хочете змінити?
     menu:
       emoji: '${channel.settings.emojis} Emojis'
-      type: '💬 Коли додавати?'
+      type: '✍️ When to add?'
+      comments_type: '💬 Comment button'
       links: '🔗 Клавіатура'
+    no_available: |
+      The channel is no longer available.
     types:
       info: |
-        <b>Виберіть, коли бот може додавати реакції до повідомлень:</b>
+        <b>Choose when the bot can attach reactions to messages:</b>
 
-        • Завжди: реакції будуть додаватися до кожного повідомлення, коли це можливо
-        • Одноразово: Реакції додаватимуться лише до одного нового повідомлення на каналі. Потім це налаштування зміниться на "ніколи", і вам потрібно буде змінити його тут ще раз
-        • Ніколи: Бот ніколи не додаватиме реакцій на ваші повідомлення
+        • Always: Reactions will be attached to every post whenever possible
+        • One time: Reactions will only be attached to one new post on the channel. Then this setting will change to "never" and you will need to change it again here
+        • Never: Bot will never attach reactions to your posts
+        • On request: Will add when the last line of the message starts with the ! and then there are emojis.
       menu:
         always: Завжди
         one: Одноразово
         never: Ніколи
+        request: On request
+    comments_types:
+      info: |
+        <b>Choose where to display comments:</b>
+
+        • Always: The comment button will always be
+        • One time: Only the next post will have a button. Then this setting will change to "never" and you will need to change it again here
+        • Never: Don't show comment button
+      menu:
+        always: Always
+        one: One time
+        never: Never
     emojis:
       send_emoji: |
         <b>Надішліть один або кілька смайлів:</b>
@@ -57,6 +73,7 @@ channels:
 
         <i>Поточні кнопки відображатимуться нижче</i>
       success: Клавіатуру змінено!
+  back: < Back
 rate:
   vote:
     rated: |
