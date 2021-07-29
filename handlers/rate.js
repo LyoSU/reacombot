@@ -1,8 +1,12 @@
 const Composer = require('telegraf/composer')
+const rateLimit = require('telegraf-ratelimit')
 
 const composer = new Composer()
 
-composer.action(/^(rate):(.*)/, async ctx => {
+composer.action(/^(rate):(.*)/, rateLimit({
+  window: 1000,
+  limit: 1
+}), async ctx => {
   let resultText = ''
   const rateName = ctx.match[2]
 

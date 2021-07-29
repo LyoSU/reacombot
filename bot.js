@@ -1,7 +1,6 @@
 const fs = require('fs')
 const path = require('path')
 const Telegraf = require('telegraf')
-const rateLimit = require('telegraf-ratelimit')
 const session = require('telegraf/session')
 const I18n = require('telegraf-i18n')
 const io = require('@pm2/io')
@@ -58,11 +57,6 @@ bot.use((ctx, next) => {
   }
   return next()
 })
-
-bot.use(rateLimit({
-  window: 150,
-  limit: 1
-}))
 
 bot.command('json', ({ replyWithHTML, message }) => replyWithHTML('<code>' + JSON.stringify(message, null, 2) + '</code>'))
 
