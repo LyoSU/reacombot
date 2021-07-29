@@ -36,7 +36,10 @@ const schema = Schema({
     type: Number,
     default: 0
   },
-  keyboardNextUpdate: Date
+  keyboardNextUpdate: {
+    type: Date,
+    index: true
+  }
 }, {
   timestamps: true
 })
