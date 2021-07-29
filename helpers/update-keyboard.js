@@ -64,7 +64,7 @@ const keyboardUpdate = async (channelId, channelMessageId) => {
         }
         return { edited: false, error }
       }),
-      sleep(2000).then(() => {
+      sleep(1000).then(() => {
         return { edited: false, error: 'timeout' }
       })
     ])
@@ -82,8 +82,8 @@ async function checkPsotForUpdate () {
   for (const post of findPost) {
     await keyboardUpdate(post.channel.channelId, post.channelMessageId)
   }
-  setTimeout(checkPsotForUpdate, 1000 * 1)
+  setTimeout(checkPsotForUpdate, 1000 * 2)
 }
-setTimeout(checkPsotForUpdate, 1000 * 1)
+setTimeout(checkPsotForUpdate, 1000 * 2)
 
 module.exports = keyboardUpdate
