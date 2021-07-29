@@ -64,7 +64,7 @@ const keyboardUpdate = async (channelId, channelMessageId) => {
         }
         return { edited: false, error }
       }),
-      sleep(1000).then(() => {
+      sleep(2000).then(() => {
         return { edited: false, error: 'timeout' }
       })
     ])
