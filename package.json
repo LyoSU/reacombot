@@ -1,6 +1,6 @@
 {
   "name": "reacombot",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "Telegram reacom bot",
   "main": "index.js",
   "scripts": {
