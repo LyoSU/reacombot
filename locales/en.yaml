@@ -26,8 +26,11 @@ channels:
       • What do you want to change?
     menu:
       emoji: '${channel.settings.emojis} Emojis'
-      type: '💬 When to add?'
+      type: '✍️ When to add?'
+      comments_type: '💬 Comment button'
       links: '🔗 Links keyboard'
+    no_available: |
+      The channel is no longer available.
     types:
       info: |
         <b>Choose when the bot can attach reactions to messages:</b>
@@ -35,6 +38,19 @@ channels:
         • Always: Reactions will be attached to every post whenever possible
         • One time: Reactions will only be attached to one new post on the channel. Then this setting will change to "never" and you will need to change it again here
         • Never: Bot will never attach reactions to your posts
+        • On request: Will add when the last line of the message starts with the ! and then there are emojis.
+      menu:
+        always: Always
+        one: One time
+        never: Never
+        request: On request
+    comments_types:
+      info: |
+          <b>Choose where to display comments:</b>
+
+          • Always: The comment button will always be
+          • One time: Only the next post will have a button. Then this setting will change to "never" and you will need to change it again here
+          • Never: Don't show comment button
       menu:
         always: Always
         one: One time
@@ -57,6 +73,7 @@ channels:
 
         <i>The current buttons will be displayed below</i>
       success: Keyboard changed!
+  back: < Back
 rate:
   vote:
     rated: |

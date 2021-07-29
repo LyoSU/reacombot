@@ -15,6 +15,13 @@ const channelControl = new Scene('channelControl')
 
 channelControl.enter(async ctx => {
   const channel = await ctx.db.Channel.findById(ctx.scene.state.channelId)
+  const channelChat = await ctx.tg.getChat(channel.channelId).catch(error => { return { error } })
+
+  if (channelChat.error) {
+    channel.available = false
+    await channel.save()
+    return ctx.replyWithHTML(ctx.i18n.t('channels.control.no_available'))
+  }
 
   const inlineKeyboard = [
     [
@@ -22,7 +29,8 @@ channelControl.enter(async ctx => {
       Markup.callbackButton(ctx.i18n.t('channels.control.menu.links', { channel }), `channel:${channel.id}:links`)
     ],
     [
-      Markup.callbackButton(ctx.i18n.t('channels.control.menu.type'), `channel:${channel.id}:type:0`)
+      Markup.callbackButton(ctx.i18n.t('channels.control.menu.type'), `channel:${channel.id}:type:0`),
+      Markup.callbackButton(ctx.i18n.t('channels.control.menu.comments_type'), `channel:${channel.id}:comments_type:0`)
     ]
   ]
 
@@ -134,17 +142,47 @@ composer.action(/channel:(.*):links/, async ctx => {
 composer.action(/channel:(.*):type:(.*)/, async ctx => {
   const channel = await ctx.db.Channel.findById(ctx.match[1])
 
-  const types = ['always', 'one', 'never']
+  const types = ['always', 'one', 'never', 'request']
 
   if (types.indexOf(ctx.match[2]) >= 0) channel.settings.type = ctx.match[2]
   await channel.save()
 
-  const inlineKeyboard = types.map(type => {
+  const inlineKeyboard = []
+
+  inlineKeyboard.push(types.map(type => {
     const selectedMark = channel.settings.type === type ? '✅ ' : ''
     return Markup.callbackButton(selectedMark + ctx.i18n.t(`channels.control.types.menu.${type}`), `channel:${channel.id}:type:${type}`)
-  })
+  }))
+
+  inlineKeyboard.push([Markup.callbackButton(ctx.i18n.t('channels.back'), `channel:${channel.id}`)])
 
   await ctx.editMessageText(ctx.i18n.t('channels.control.types.info', {
+    channel
+  }), {
+    parse_mode: 'HTML',
+    disable_web_page_preview: true,
+    reply_markup: Markup.inlineKeyboard(inlineKeyboard)
+  })
+})
+
+composer.action(/channel:(.*):comments_type:(.*)/, async ctx => {
+  const channel = await ctx.db.Channel.findById(ctx.match[1])
+
+  const types = ['always', 'one', 'never']
+
+  if (types.indexOf(ctx.match[2]) >= 0) channel.settings.commentsType = ctx.match[2]
+  await channel.save()
+
+  const inlineKeyboard = []
+
+  inlineKeyboard.push(types.map(type => {
+    const selectedMark = channel.settings.commentsType === type ? '✅ ' : ''
+    return Markup.callbackButton(selectedMark + ctx.i18n.t(`channels.control.comments_types.menu.${type}`), `channel:${channel.id}:comments_type:${type}`)
+  }))
+
+  inlineKeyboard.push([Markup.callbackButton(ctx.i18n.t('channels.back'), `channel:${channel.id}`)])
+
+  await ctx.editMessageText(ctx.i18n.t('channels.control.comments_types.info', {
     channel
   }), {
     parse_mode: 'HTML',
@@ -160,7 +198,10 @@ composer.action(/channel:(.*)/, async ctx => {
 })
 
 const channels = async ctx => {
-  const channels = await ctx.db.Channel.find({ 'administrators.user': ctx.session.userInfo._id })
+  const channels = await ctx.db.Channel.find({
+    'administrators.user': ctx.session.userInfo._id,
+    available: { $ne: 'false' }
+  })
 
   if (channels.length <= 0) return ctx.replyWithHTML(ctx.i18n.t('channels.not_found'))
 

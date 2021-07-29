@@ -9,6 +9,7 @@ composer.on('message', Composer.groupChat(async (ctx, next) => {
     if (!post) return next()
 
     post.commentsCount += 1
+    post.keyboardNextUpdate = new Date()
     await post.save()
   }
   return next()

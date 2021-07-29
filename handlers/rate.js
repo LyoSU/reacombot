@@ -1,5 +1,8 @@
 const Composer = require('telegraf/composer')
 const rateLimit = require('telegraf-ratelimit')
+const {
+  keyboardUpdate
+} = require('../helpers')
 
 const composer = new Composer()
 
@@ -37,36 +40,15 @@ composer.action(/^(rate):(.*)/, rateLimit({
 
   await post.save()
 
-  ctx.state.answerCbQuery = [resultText]
+  const updateResult = await keyboardUpdate(channel.channelId, post.channelMessageId)
 
-  const votesKeyboardArray = []
-
-  post.rate.votes.forEach(react => {
-    votesKeyboardArray.push({
-      text: `${react.name} ${react.vote.length > 0 ? react.vote.length : ''}`,
-      callback_data: `rate:${react.name}`
-    })
-  })
-
-  votesKeyboardArray.push({
-    text: `💬 ${post.commentsCount > 0 ? '≈' + post.commentsCount : ''}`,
-    url: `https://t.me/c/${channel.groupId.toString().substr(4)}/${channel.settings.showStart === 'top' ? 1 : 1000000}?thread=${post.groupMessageId}`
-  })
-
-  const editReaction = await ctx.editMessageReplyMarkup({
-    inline_keyboard: [votesKeyboardArray].concat(post.keyboard)
-  }).catch(error => {
-    return { error }
-  })
-
-  if (editReaction.error && editReaction.error.parameters.retry_after) {
+  if (updateResult.edited === true) ctx.state.answerCbQuery = [resultText]
+  else {
     const reactListArray = post.rate.votes.map(rate => {
       return `${rate.name} — ${rate.vote.length}`
     })
 
     ctx.state.answerCbQuery = [resultText + ctx.i18n.t('rate.vote.rated_limit', { rateName, reactList: reactListArray.join('\n') }), true]
-  } else if (editReaction.error) {
-    console.error(editReaction.error)
   }
 })
 

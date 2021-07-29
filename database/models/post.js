@@ -28,10 +28,15 @@ const schema = Schema({
     }
   },
   keyboard: Array,
+  commentsEnable: {
+    type: Boolean,
+    default: true
+  },
   commentsCount: {
     type: Number,
     default: 0
-  }
+  },
+  keyboardNextUpdate: Date
 }, {
   timestamps: true
 })

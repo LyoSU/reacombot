@@ -1,5 +1,8 @@
 const Composer = require('telegraf/composer')
 const EmojiDbLib = require('emoji-db')
+const {
+  keyboardUpdate
+} = require('../helpers')
 
 const emojiDb = new EmojiDbLib({ useDefaultDb: true })
 
@@ -29,7 +32,35 @@ composer.on('channel_post', async (ctx, next) => {
   const votesRateArray = []
   const votesKeyboardArray = []
 
-  const emojis = emojiDb.searchFromText({ input: ctx.session.channelInfo.settings.emojis, fixCodePoints: true })
+  let emojis
+
+  if (ctx.channelPost.text || ctx.channelPost.caption) {
+    const text = ctx.channelPost.text || ctx.channelPost.caption
+    const textLines = text.split('\n')
+    const lastLine = textLines.pop()
+
+    if (lastLine[0] === '!') {
+      const emojisFromLine = emojiDb.searchFromText({ input: lastLine, fixCodePoints: true })
+      if (emojisFromLine.length > 0) emojis = emojisFromLine
+
+      if (ctx.channelPost.text) {
+        await ctx.tg.editMessageText(ctx.chat.id, ctx.channelPost.message_id, null, textLines.join('\n'), {
+          entities: ctx.channelPost.entities
+        }).catch(error => {
+          console.error('remove emoji edit:', error)
+        })
+      } else {
+        await ctx.tg.editMessageCaption(ctx.chat.id, ctx.channelPost.message_id, null, textLines.join('\n'), {
+          entities: ctx.channelPost.entities
+        }).catch(error => {
+          console.error('remove emoji edit caption:', error)
+        })
+      }
+    }
+  }
+
+  if (!emojis && ctx.session.channelInfo.settings.type === 'request') return next()
+  if (!emojis) emojiDb.searchFromText({ input: ctx.session.channelInfo.settings.emojis, fixCodePoints: true })
 
   emojis.forEach(data => {
     votesRateArray.push({
@@ -50,26 +81,25 @@ composer.on('channel_post', async (ctx, next) => {
   }
   post.keyboard = post.channel.settings.keyboard
 
+  if (ctx.session.channelInfo.settings.commentsType === 'never') post.commentsEnable = false
+  if (ctx.session.channelInfo.settings.commentsType === 'one') ctx.session.channelInfo.settings.commentsType = 'never'
+
   await post.save()
 
-  votesKeyboardArray.push({
-    text: '💬 🕒',
-    callback_data: 'post:wait'
-  })
+  const updateResult = await keyboardUpdate(post.channel.channelId, post.channelMessageId)
 
-  const editMessage = await ctx.tg.editMessageReplyMarkup(ctx.channelPost.chat.id, ctx.channelPost.message_id, null, {
-    inline_keyboard: [votesKeyboardArray].concat(post.keyboard)
-  }).catch(error => { return { error } })
+  if (updateResult.error && updateResult.error.code === 400 && !ctx.channelPost.forward_from_message_id) {
+    const botMember = await ctx.tg.getChatMember(post.channel.channelId, ctx.botInfo.id)
+    if (botMember.can_be_edited === false) {
+      for (const admin of chatAdministrators) {
+        const adminUser = await ctx.db.User.findOne({ telegramId: admin.user.id })
 
-  if (editMessage.error && !ctx.channelPost.forward_from_message_id) {
-    for (const admin of chatAdministrators) {
-      const adminUser = await ctx.db.User.findOne({ telegramId: admin.user.id })
-
-      if (adminUser) {
-        ctx.i18n.locale(adminUser.settings.locale)
-        await ctx.tg.sendMessage(admin.user.id, ctx.i18n.t('error.cant_edited'), {
-          parse_mode: 'HTML'
-        }).catch(() => {})
+        if (adminUser) {
+          ctx.i18n.locale(adminUser.settings.locale)
+          await ctx.tg.sendMessage(admin.user.id, ctx.i18n.t('error.cant_edited'), {
+            parse_mode: 'HTML'
+          }).catch(() => {})
+        }
       }
     }
   }
@@ -84,14 +114,15 @@ composer.on('message', async (ctx, next) => {
     const channel = await ctx.db.Channel.findOne({ channelId: ctx.message.forward_from_chat.id })
     const post = await ctx.db.Post.findOne({ channel, channelMessageId: ctx.message.forward_from_message_id })
 
-    if (!post) return next()
+    if (!post || post.commentsEnable === false) return next()
 
     post.groupMessageId = ctx.message.message_id
     await post.save()
 
     if (channel.groupId !== ctx.message.chat.id) {
-      channel.groupId = ctx.message.chat.id
-      await channel.save()
+      await ctx.db.Channel.findByIdAndUpdate(channel, {
+        groupId: ctx.message.chat.id
+      })
     }
 
     const votesKeyboardArray = []
@@ -108,9 +139,7 @@ composer.on('message', async (ctx, next) => {
       url: `https://t.me/c/${ctx.message.chat.id.toString().substr(4)}/${channel.settings.showStart === 'top' ? 1 : 1000000}?thread=${ctx.message.message_id}`
     })
 
-    await ctx.tg.editMessageReplyMarkup(ctx.message.forward_from_chat.id, ctx.message.forward_from_message_id, null, {
-      inline_keyboard: [votesKeyboardArray].concat(post.keyboard)
-    })
+    await keyboardUpdate(channel.channelId, post.channelMessageId)
   } else {
     return next()
   }

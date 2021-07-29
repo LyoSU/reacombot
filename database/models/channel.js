@@ -12,12 +12,21 @@ const schema = Schema({
     index: true
   },
   title: String,
+  available: {
+    type: Boolean,
+    default: true
+  },
   settings: {
     emojis: {
       type: String,
       default: '👍👎'
     },
     type: {
+      type: String,
+      enum: ['always', 'one', 'never', 'request'],
+      default: 'always'
+    },
+    commentsType: {
       type: String,
       enum: ['always', 'one', 'never'],
       default: 'always'
