@@ -12,27 +12,13 @@ composer.on('channel_post', async (ctx, next) => {
   if (ctx.session.channelInfo.settings.type === 'never') return next()
   if (ctx.session.channelInfo.settings.type === 'one') ctx.session.channelInfo.settings.type = 'never'
 
-  const chatAdministrators = await ctx.getChatAdministrators()
-
-  ctx.session.channelInfo.administrators = []
-
-  for (const admin of chatAdministrators) {
-    const adminUser = await ctx.db.User.findOne({ telegramId: admin.user.id })
-
-    if (adminUser) {
-      ctx.session.channelInfo.administrators.push({
-        user: adminUser._id,
-        status: admin.status
-      })
-    }
-  }
-
   const post = new ctx.db.Post()
 
   const votesRateArray = []
   const votesKeyboardArray = []
 
-  let emojis
+  let emojis, newText
+  let messageType = 'keyboard'
 
   if (ctx.channelPost.text || ctx.channelPost.caption) {
     const text = ctx.channelPost.text || ctx.channelPost.caption
@@ -43,19 +29,10 @@ composer.on('channel_post', async (ctx, next) => {
       const emojisFromLine = emojiDb.searchFromText({ input: lastLine, fixCodePoints: true })
       if (emojisFromLine.length > 0) emojis = emojisFromLine
 
-      if (ctx.channelPost.text) {
-        await ctx.tg.editMessageText(ctx.chat.id, ctx.channelPost.message_id, null, textLines.join('\n'), {
-          entities: ctx.channelPost.entities
-        }).catch(error => {
-          console.error('remove emoji edit:', error)
-        })
-      } else {
-        await ctx.tg.editMessageCaption(ctx.chat.id, ctx.channelPost.message_id, null, textLines.join('\n'), {
-          entities: ctx.channelPost.entities
-        }).catch(error => {
-          console.error('remove emoji edit caption:', error)
-        })
-      }
+      newText = textLines.join('\n')
+
+      if (ctx.channelPost.text) messageType = 'text'
+      else messageType = 'media'
     }
   }
 
@@ -86,17 +63,22 @@ composer.on('channel_post', async (ctx, next) => {
 
   await post.save()
 
-  const updateResult = await keyboardUpdate(post.channel.channelId, post.channelMessageId)
+  const updateResult = await keyboardUpdate(post.channel.channelId, post.channelMessageId, {
+    type: messageType,
+    text: newText
+  })
 
   if (updateResult.error && updateResult.error.code === 400 && !ctx.channelPost.forward_from_message_id) {
     const botMember = await ctx.tg.getChatMember(post.channel.channelId, ctx.botInfo.id)
     if (botMember.can_be_edited === false) {
-      for (const admin of chatAdministrators) {
-        const adminUser = await ctx.db.User.findOne({ telegramId: admin.user.id })
+      for (const admin of post.channel.administrators) {
+        const adminUser = await ctx.db.User.findOne({ telegramId: admin.user })
 
         if (adminUser) {
           ctx.i18n.locale(adminUser.settings.locale)
-          await ctx.tg.sendMessage(admin.user.id, ctx.i18n.t('error.cant_edited'), {
+          await ctx.tg.sendMessage(admin.user, ctx.i18n.t('error.cant_edited', {
+            postLink: `https://t.me/c/${ctx.chat.id.toString().substr(4)}/${ctx.channelPost.message_id}`
+          }), {
             parse_mode: 'HTML'
           }).catch(() => {})
         }

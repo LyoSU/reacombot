@@ -82,7 +82,10 @@ bot.use(session({
 
 bot.use(async (ctx, next) => {
   if (ctx.from) await getUser(ctx)
-  if (ctx.channelPost) await getChannel(ctx)
+  if (ctx.channelPost) {
+    ctx.session.channelInfo = await getChannel(ctx.chat)
+    ctx.session.channelInfo.available = true
+  }
 
   if (ctx.callbackQuery) {
     ctx.state.answerCbQuery = []

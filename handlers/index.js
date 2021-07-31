@@ -2,10 +2,10 @@ module.exports = (bot) => {
   const handlers = [
     'channels',
     'language',
-    'help',
     'post',
     'rate',
-    'counter'
+    'counter',
+    'help'
   ]
 
   handlers.forEach((handler) => {

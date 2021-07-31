@@ -12,6 +12,7 @@ const schema = Schema({
     index: true
   },
   title: String,
+  username: String,
   available: {
     type: Boolean,
     default: true
@@ -40,8 +41,7 @@ const schema = Schema({
   },
   administrators: [{
     user: {
-      type: Schema.Types.ObjectId,
-      ref: 'User',
+      type: Number,
       index: true
     },
     status: String

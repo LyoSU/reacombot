@@ -11,7 +11,7 @@ function sleep (ms) {
   })
 }
 
-const keyboardUpdate = async (channelId, channelMessageId) => {
+const keyboardUpdate = async (channelId, channelMessageId, message) => {
   const channel = await db.Channel.findOne({ channelId })
   const post = await db.Post.findOne({ channel, channelMessageId })
 
@@ -42,13 +42,29 @@ const keyboardUpdate = async (channelId, channelMessageId) => {
     }
   }
 
+  let methodUpdate = 'editMessageReplyMarkup'
+  const optsUpdate = {
+    chat_id: channelId,
+    message_id: channelMessageId,
+    reply_markup: JSON.stringify({ inline_keyboard: [votesKeyboardArray].concat(post.keyboard) })
+  }
+
+  if (message && message.type) {
+    if (message.type === 'text') {
+      methodUpdate = 'editMessageText'
+      optsUpdate.text = message.text
+    }
+    if (message.type === 'media') {
+      methodUpdate = 'editMessageCaption'
+      optsUpdate.caption = message.text
+    }
+  }
+
   if (!post.keyboardNextUpdate || new Date().getTime() > post.keyboardNextUpdate.getTime()) {
     return Promise.race([
-      telegram.editMessageReplyMarkup(channelId, channelMessageId, null, {
-        inline_keyboard: [votesKeyboardArray].concat(post.keyboard)
-      }).then(() => {
+      telegram.callApi(methodUpdate, optsUpdate).then(() => {
         db.Post.findByIdAndUpdate(post, {
-          keyboardNextUpdate: new Date(new Date().getTime() + 150)
+          keyboardNextUpdate: new Date(new Date().getTime() + 200)
         }).then(() => {})
         return { edited: true }
       }).catch(error => {
@@ -64,7 +80,7 @@ const keyboardUpdate = async (channelId, channelMessageId) => {
         }
         return { edited: false, error }
       }),
-      sleep(200).then(() => {
+      sleep(150).then(() => {
         return { edited: false, error: 'timeout' }
       })
     ])

@@ -6,6 +6,9 @@ const EmojiDbLib = require('emoji-db')
 const {
   scenes
 } = require('../middlewares')
+const {
+  getChannel
+} = require('../helpers')
 
 const emojiDb = new EmojiDbLib({ useDefaultDb: true })
 
@@ -199,7 +202,7 @@ composer.action(/channel:(.*)/, async ctx => {
 
 const channels = async ctx => {
   const channels = await ctx.db.Channel.find({
-    'administrators.user': ctx.session.userInfo._id,
+    'administrators.user': ctx.from.id,
     available: { $ne: 'false' }
   })
 
@@ -220,5 +223,11 @@ const channels = async ctx => {
 
 composer.hears(match('menu.channels'), Composer.privateChat(channels))
 composer.command('channels', Composer.privateChat(channels))
+
+composer.on('forward', Composer.privateChat(async (ctx, next) => {
+  if (ctx.message.forward_from_chat.type !== 'channel') return next()
+  await getChannel(ctx.message.forward_from_chat)
+  await ctx.replyWithHTML(ctx.i18n.t('channels.updated'))
+}))
 
 module.exports = composer
