@@ -20,14 +20,17 @@ module.exports = async chat => {
   channel.settings = channel.settings || new db.Channel().settings
 
   const chatAdministrators = await telegram.getChatAdministrators(chat.id).catch(console.error)
+  if (!chatAdministrators) {
+    channel.available = false
+  } else {
+    channel.administrators = []
 
-  channel.administrators = []
-
-  for (const admin of chatAdministrators) {
-    channel.administrators.push({
-      user: admin.user.id,
-      status: admin.status
-    })
+    for (const admin of chatAdministrators) {
+      channel.administrators.push({
+        user: admin.user.id,
+        status: admin.status
+      })
+    }
   }
 
   channel.updatedAt = new Date()
