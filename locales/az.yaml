@@ -20,6 +20,8 @@ channels:
     <b>😞 Botu hələ ki heç bir kanala əlavə etməmisiniz</b>
 
     Bunu etdiyinizə əminsinizsə, mesajları "edit" etmək və kanala hər hansı bir yazı göndərmək üçün icazəmin olmasına əmin olun.
+  updated: |
+    Channel information has been updated!
   control:
     info: |
       Kanal seçildi: <b>${channel.title}</b>
@@ -91,6 +93,6 @@ wait: |
   Bu uzun müddət baş verməsəydi, böyük ehtimalla bot əlavə olunmuş qrupa əlavə edilmədi.
 error:
   cant_edited: |
-    <b>😓 Son yazıya reaksiya əlavə etmək alınmadı</b>
+    <b>😓 Failed to add reaction to <a href="${postLink}">post</a></b>
 
-    Yazıları redaktə etmək üçün icazəm olmaya bilər.
+    I may not have permission to edit posts.
