@@ -19,6 +19,8 @@ channels:
     <b>😞 You have not added the bot to any of the channels yet</b>
 
     If you are sure that you did this, try to make sure that i have permission to edit messages and send any post to the channel.
+  updated: |
+    Channel information has been updated!
   control:
     info: |
       Channel selected: <b>${channel.title}</b>
@@ -90,6 +92,6 @@ wait: |
   If this did not happen for a long time, most likely the bot was not added to the attached group.
 error:
   cant_edited: |
-    <b>😓 Failed to add reactions to the last post</b>
+    <b>😓 Failed to add reaction to <a href="${postLink}">post</a></b>
 
     I may not have permission to edit posts.
