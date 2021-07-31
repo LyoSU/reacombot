@@ -19,7 +19,7 @@ module.exports = async chat => {
   if (chat.username) channel.username = chat.username
   channel.settings = channel.settings || new db.Channel().settings
 
-  const chatAdministrators = await telegram.getChatAdministrators(chat.id)
+  const chatAdministrators = await telegram.getChatAdministrators(chat.id).catch(console.error)
 
   channel.administrators = []
 
