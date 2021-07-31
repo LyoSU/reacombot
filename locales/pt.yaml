@@ -19,6 +19,8 @@ channels:
     <b>😞 Você ainda não adicionou o bot a nenhum dos canais</b>
 
     Se tem certeza de que fez isso, verifique se eu tenho permissão para editar mensagens e enviar qualquer postagem para o canal.
+  updated: |
+    Channel information has been updated!
   control:
     info: |
       Canal selecionado: <b>${channel.title}</b>
@@ -90,6 +92,6 @@ wait: |
   Se demorar muito, provavelmente o bot não foi adicionado ao grupo vinculado.
 error:
   cant_edited: |
-    <b>😓 Falha ao adicionar reações à última postagem</b>
+    <b>😓 Failed to add reaction to <a href="${postLink}">post</a></b>
 
-    Talvez eu não tenha permissão para editar as postagens.
+    I may not have permission to edit posts.
