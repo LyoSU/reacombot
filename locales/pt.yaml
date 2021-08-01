@@ -20,7 +20,7 @@ channels:
 
     Se tem certeza de que fez isso, verifique se eu tenho permissão para editar mensagens e enviar qualquer postagem para o canal.
   updated: |
-    Channel information has been updated!
+    Informação do canal foi atualizada!
   control:
     info: |
       Canal selecionado: <b>${channel.title}</b>
@@ -28,35 +28,35 @@ channels:
       • O que deseja alterar?
     menu:
       emoji: '${channel.settings.emojis} Emojis'
-      type: '✍️ When to add?'
-      comments_type: '💬 Comment button'
+      type: '✍️ Quando adicionar?'
+      comments_type: '💬 Botão de comentários'
       links: '🔗 Botões de links'
     no_available: |
-      The channel is no longer available.
+      O canal não está mais disponível.
     types:
       info: |
-        <b>Choose when the bot can attach reactions to messages:</b>
+        <b>Escolha quando o bot irá anexar reações às mensagens:</b>
 
-        • Always: Reactions will be attached to every post whenever possible
-        • One time: Reactions will only be attached to one new post on the channel. Then this setting will change to "never" and you will need to change it again here
-        • Never: Bot will never attach reactions to your posts
-        • On request: Will add when the last line of the message starts with the ! and then there are emojis.
+        • Sempre: Reações serão anexadas a cada postagem sempre que possível
+        • Uma vez: Reações só serão anexadas a uma nova postagem no canal. Depois disso, esta configuração mudará para "nunca" e você precisará alterá-la novamente aqui.
+        • Nunca: O bot nunca anexará reações às suas postagens.
+        • A pedido: Será adicionado quando a última linha da mensagem começar com o ! e, depois, existem emojis.
       menu:
         always: Sempre
         one: Uma vez
         never: Nunca
-        request: On request
+        request: A pedido
     comments_types:
       info: |
-        <b>Choose where to display comments:</b>
+        <b>Escolha onde exibir comentários:</b>
 
-        • Always: The comment button will always be
-        • One time: Only the next post will have a button. Then this setting will change to "never" and you will need to change it again here
-        • Never: Don't show comment button
+        • Sempre: O botão de comentário sempre será
+        • Uma vez: Somente a próxima postagem terá um botão. Então esta configuração vai mudar para "nunca" e você precisará mudá-la novamente aqui
+        • Nunca: não mostrar o botão de comentário
       menu:
-        always: Always
-        one: One time
-        never: Never
+        always: Sempre
+        one: Uma vez
+        never: Nunca
     emojis:
       send_emoji: |
         <b>Envie um ou mais emojis:</b>
@@ -75,7 +75,7 @@ channels:
 
         <i>Os botões atuais serão exibidos abaixo</i>
       success: Botões alterados!
-  back: < Back
+  back: < Voltar
 rate:
   vote:
     rated: |
@@ -92,6 +92,6 @@ wait: |
   Se demorar muito, provavelmente o bot não foi adicionado ao grupo vinculado.
 error:
   cant_edited: |
-    <b>😓 Failed to add reaction to <a href="${postLink}">post</a></b>
+    <b>😓 Falha ao adicionar reações à <a href="${postLink}">última postagem</a></b>
 
-    I may not have permission to edit posts.
+    Talvez eu não tenha permissão para editar as postagens.
