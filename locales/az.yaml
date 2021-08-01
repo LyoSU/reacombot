@@ -21,7 +21,7 @@ channels:
 
     Bunu etdiyinizə əminsinizsə, mesajları "edit" etmək və kanala hər hansı bir yazı göndərmək üçün icazəmin olmasına əmin olun.
   updated: |
-    Channel information has been updated!
+    Kanal məlumatları yeniləndi!
   control:
     info: |
       Kanal seçildi: <b>${channel.title}</b>
@@ -29,35 +29,35 @@ channels:
       • Nəyi dəyişdirmək istəyirsiniz?
     menu:
       emoji: '${channel.settings.emojis} emoji'
-      type: '✍️ When to add?'
-      comments_type: '💬 Comment button'
+      type: '✍️ Nə vaxt əlavə etməli?'
+      comments_type: '💬 Şərh düyməsi'
       links: '🔗 İstinad klaviaturası'
     no_available: |
-      The channel is no longer available.
+      Kanal artıq əlçatan deyil.
     types:
       info: |
-        <b>Choose when the bot can attach reactions to messages:</b>
+        <b>Botun mesajlara reaksiyalarını nə vaxt əlavə edə biləcəyini seçin:</b>
 
-        • Always: Reactions will be attached to every post whenever possible
-        • One time: Reactions will only be attached to one new post on the channel. Then this setting will change to "never" and you will need to change it again here
-        • Never: Bot will never attach reactions to your posts
-        • On request: Will add when the last line of the message starts with the ! and then there are emojis.
+        • Həmişə: Reaksiyalar mümkün olduqda hər yazıya əlavə olunacaq
+        • Bir dəfə: Reaksiyalar yalnız kanaldakı yeni bir yazıya əlavə olunacaq. Sonra bu ayar "heç vaxt" olaraq dəyişəcək və yenidən burada dəyişdirməlisiniz
+        • Heç vaxt: Bot heç vaxt yazılarınıza reaksiyalar əlavə etməyəcək.
+        • İstəyə görə: Mesajın son sətri "ilə" başladıqda əlavə edəcək! və sonra emojilər var.
       menu:
         always: Həmişə
         one: Bir dəfəlik
         never: Heç vaxt
-        request: On request
+        request: Xahişi ilə
     comments_types:
       info: |
-        <b>Choose where to display comments:</b>
+        <b>Şərhlərin göstəriləcəyi yeri seçin:</b>
 
-        • Always: The comment button will always be
-        • One time: Only the next post will have a button. Then this setting will change to "never" and you will need to change it again here
-        • Never: Don't show comment button
+        • Həmişə: Şərh düyməsi hər zaman
+        olacaq • Bir dəfə: Yalnız növbəti yazıda bir düymə olacaq. Sonra bu parametr "heç vaxt" olaraq dəyişəcək və burada yenidən dəyişdirməlisiniz
+        • Heç vaxt: şərh düyməsini göstərməyin
       menu:
-        always: Always
-        one: One time
-        never: Never
+        always: Həmişə
+        one: Bir dəfəlik
+        never: Heç vaxt
     emojis:
       send_emoji: |
         <b>Bir və ya daha çox emoji göndərin:</b>
@@ -76,7 +76,7 @@ channels:
 
         <i>Hazırkı düymələr aşağıda ğöstəriləcək</i>
       success: Klaviatura dəyişdirildi!
-  back: < Back
+  back: < Geri
 rate:
   vote:
     rated: |
@@ -93,6 +93,6 @@ wait: |
   Bu uzun müddət baş verməsəydi, böyük ehtimalla bot əlavə olunmuş qrupa əlavə edilmədi.
 error:
   cant_edited: |
-    <b>😓 Failed to add reaction to <a href="${postLink}">post</a></b>
+    <b>😓 Son <a href="${postLink}">yazıya</a> reaksiya əlavə etmək alınmadı</b>
 
-    I may not have permission to edit posts.
+    Yazıları redaktə etmək üçün icazəm olmaya bilər.
