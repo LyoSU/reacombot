@@ -1,97 +1,97 @@
----
+# ---Translator: @By_Azade - www.github.com/muhammedfurkan
 language_name: '🇹🇷 Türkçe'
 help: |
   <b>Hey! 👋</b>
-  I will add <u>reactions</u> to your posts on the channel along with <u>native comments</u>. It's enough just to add me to your channel, give me permission to edit messages, and also add me to the group that is tied to the channel.
+  Kanaldaki gönderilerinize <u>yerel yorumlar</u> ile birlikte <u>tepkiler</u> ekleyeceğim. Beni kanalına eklemen, mesajları düzenlememe izin vermen ve beni kanala bağlı gruba eklemen yeterli.
 
-  • If you do not want me to change all messages or want to change emoji, then click the buttons below or send the command /channels to configure. <i>To display a channel in the list, you must first write any post.</i>
+  • Tüm mesajları değiştirmemi istemiyorsanız veya emojiyi değiştirmek istiyorsanız aşağıdaki butonlara tıklayın veya yapılandırmak için /channels komutunu gönderin. <i>Listede bir kanalı görüntülemek için önce herhangi bir gönderi yazmalısınız.</i>
 
-  <b>• Need help or have a suggestion?</b> Write to me: @Ly_OBot. Please write immediately what you are talking about and use English or Russian.
-  <b>• Do you like the bot?</b> You can help him at this link: donate.lyo.su
+  <b>• Yardım ve öneri mi lazım?</b> Buradan bana ulaşın.: @Ly_OBot. Lütfen ne hakkında olduğunu hemen yazın ve İngilizce veya Rusça dilleri kullanın.
+  <b>• Botu sevdin mi ?</b> Bağışta bulunmak için: donate.lyo.su
 
-  🧑‍💻 Follow the developer: @LyBlog (Only in Russian)
+  🧑‍💻 Yapımcının kanalını takip et: @LyBlog (Sadece Rusça)
 menu:
-  channels: '📣 My channels'
+  channels: '📣 Kanallarım'
 channels:
   select: |
-    Select channel:
+    Kanal Seç:
   not_found: |
-    <b>😞 You have not added the bot to any of the channels yet</b>
+    <b>😞 Henüz bir kanal eklemedin</b>
 
-    If you are sure that you did this, try to make sure that i have permission to edit messages and send any post to the channel.
+    Bunu yaptığınızdan eminseniz, mesajları düzenleme ve kanala herhangi bir gönderi gönderme iznim olduğundan emin olun.
   updated: |
-    Channel information has been updated!
+    Kanal bilgileri güncellendi!
   control:
     info: |
-      Channel selected: <b>${channel.title}</b>
+      Kanal Seçildi: <b>${channel.title}</b>
 
-      • What do you want to change?
+      • Neyi değiştirmek istiyorsun?
     menu:
-      emoji: '${channel.settings.emojis} Emojis'
-      type: '✍️ When to add?'
-      comments_type: '💬 Comment button'
-      links: '🔗 Links keyboard'
+      emoji: '${channel.settings.emojis} Emojiler'
+      type: '✍️ Ne zaman eklensin?'
+      comments_type: '💬 Yorum butonu'
+      links: '🔗 Linkli buton'
     no_available: |
-      The channel is no longer available.
+      Bu kanal artık mevcut değil.
     types:
       info: |
-        <b>Choose when the bot can attach reactions to messages:</b>
+        <b>Botun mesajlara ne zaman tepki ekleyebileceğini seçin:</b>
 
-        • Always: Reactions will be attached to every post whenever possible
-        • One time: Reactions will only be attached to one new post on the channel. Then this setting will change to "never" and you will need to change it again here
-        • Never: Bot will never attach reactions to your posts
-        • On request: Will add when the last line of the message starts with the ! and then there are emojis.
+        • Her zaman: Tepkiler mümkün olduğunda her gönderiye eklenecektir.
+        • Bir kere: Tepkiler kanalda yalnızca bir yeni gönderiye eklenecektir. Ardından bu ayar "asla" olarak değişecek ve burada tekrar değiştirmeniz gerekecek
+        • Asla: Bot, gönderilerinize asla tepki eklemez
+        • İstek üzerine: İletinin son satırı ! ile başladığında eklenecektir. ve sonra emojiler var.
       menu:
-        always: Always
-        one: One time
-        never: Never
-        request: On request
+        always: Her zaman
+        one: Bir kere
+        never: Asla
+        request: İstek üzerine
     comments_types:
       info: |
-        <b>Choose where to display comments:</b>
+        <b>Yorumların ne zaman görüntüleneceğini seçin:</b>
 
-        • Always: The comment button will always be
-        • One time: Only the next post will have a button. Then this setting will change to "never" and you will need to change it again here
-        • Never: Don't show comment button
+        • Her zaman: Yorum butonu her zaman olacak
+        • Bir kez: Sadece bir sonraki gönderide bir buton olacak. Ardından bu ayar "asla" olarak değişecek ve burada tekrar değiştirmeniz gerekecek
+        • Asla: Yorum butonunu gösterme
       menu:
-        always: Always
-        one: One time
-        never: Never
+        always: Her zaman
+        one: Bir kere
+        never: Asla
     emojis:
       send_emoji: |
-        <b>Send one or more emojis:</b>
+        <b>Emoji ve Emojiler gönder:</b>
 
-        Current: <code>${channel.settings.emojis}</code>
-        One emoji — one button
+        Şuanki emoji: <code>${channel.settings.emojis}</code>
+        Bir emoji — bir buton
     links:
       send_links: |
-        <b>Send keyboard list:</b>
+        <b>Linkli buton listesi:</b>
 
-        Example:
-        <pre>My site - https://lyo.su/ | Telegram - https://telegram.org/
-        Dev blog - https://t.me/LyBlog</pre>
+        Örnek:
+        <pre>Kanalım - https://lyo.su/ | Telegram - https://telegram.org/
+        Geliştirici Bloğum - https://t.me/LyBlog</pre>
 
-        Send any text to delete.
+        Silmek için herhangi bir metin gönderin.
 
-        <i>The current buttons will be displayed below</i>
-      success: Keyboard changed!
-  back: < Back
+        <i>Geçerli düğmeler aşağıda görüntülenecektir</i>
+      success: Buton değişti!
+  back: < Geri
 rate:
   vote:
     rated: |
-      You ${rateName} this
+      Bunu ${rateName} onayladın.
     back: |
-      You took your reaction back
+      Tepkiyi geri çektin
     rated_limit: |
       ${reactList}
 
-      Counters in the post will be updated soon.
+      Gönderideki sayaçlar yakında güncellenecektir.
 wait: |
   🕒 Comments will be posted here soon...
 
-  If this did not happen for a long time, most likely the bot was not added to the attached group.
+  Bu uzun bir süre olmadıysa, büyük olasılıkla bot eklenmesi gereken gruba eklenmedi.
 error:
   cant_edited: |
-    <b>😓 Failed to add reaction to <a href="${postLink}">post</a></b>
+    <b>😓 Bu gönderiye <a href="${postLink}">post</a> reaksiyon ekleyemedim.</b>
 
-    I may not have permission to edit posts.
+    Mesajları düzenleme iznim olmayabilir.
