@@ -1,4 +1,3 @@
-const fs = require('fs')
 const path = require('path')
 const Telegraf = require('telegraf')
 const session = require('telegraf/session')
@@ -39,8 +38,6 @@ bot.use((ctx, next) => {
 bot.use(stats)
 
 bot.use((ctx, next) => {
-  const config = JSON.parse(fs.readFileSync('./config.json', 'utf8'))
-  ctx.config = config
   ctx.db = db
   return next()
 })

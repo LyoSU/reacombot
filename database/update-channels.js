@@ -11,7 +11,7 @@ const updateChannels = () => {
 
   channels.on('data', async (channel) => {
     const ch = await getChannel({ id: channel.channelId })
-    await ch.save({ validateBeforeSave: false })
+    await ch.save()
     console.log(ch.title)
   })
 }
