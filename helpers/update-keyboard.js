@@ -105,9 +105,11 @@ async function checkPsotForUpdate () {
   for (const post of findPost) {
     promises.push(keyboardUpdate(post.channel.channelId, post.channelMessageId))
   }
-  await raceAll(promises, 5 * 1000).catch(error => {
-    console.error('update post error:', error)
-  })
+  if (promises.length > 0) {
+    await raceAll(promises, 5 * 1000).catch(error => {
+      console.error('update post error:', error)
+    })
+  }
   setTimeout(checkPsotForUpdate, 1000)
 }
 setTimeout(checkPsotForUpdate, 1000)
