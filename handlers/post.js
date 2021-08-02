@@ -15,7 +15,6 @@ composer.on('channel_post', async (ctx, next) => {
   const post = new ctx.db.Post()
 
   const votesRateArray = []
-  const votesKeyboardArray = []
 
   let emojis, newText
   let messageType = 'keyboard'
@@ -43,10 +42,6 @@ composer.on('channel_post', async (ctx, next) => {
     votesRateArray.push({
       name: data.emoji,
       vote: []
-    })
-    votesKeyboardArray.push({
-      text: data.emoji,
-      callback_data: `rate:${data.emoji}`
     })
   })
 
@@ -106,20 +101,6 @@ composer.on('message', async (ctx, next) => {
         groupId: ctx.message.chat.id
       })
     }
-
-    const votesKeyboardArray = []
-
-    post.rate.votes.forEach(react => {
-      votesKeyboardArray.push({
-        text: react.name,
-        callback_data: `rate:${react.name}`
-      })
-    })
-
-    votesKeyboardArray.push({
-      text: '💬',
-      url: `https://t.me/c/${ctx.message.chat.id.toString().substr(4)}/${channel.settings.showStart === 'top' ? 1 : 1000000}?thread=${ctx.message.message_id}`
-    })
 
     await keyboardUpdate(channel.channelId, post.channelMessageId)
   } else {
