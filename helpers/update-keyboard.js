@@ -96,7 +96,9 @@ async function checkPsotForUpdate () {
     }
   }).populate('channel')
   for (const post of findPost) {
-    await keyboardUpdate(post.channel.channelId, post.channelMessageId)
+    await keyboardUpdate(post.channel.channelId, post.channelMessageId).catch(error => {
+      console.error('update post error:', error)
+    })
   }
   setTimeout(checkPsotForUpdate, 1000)
 }
