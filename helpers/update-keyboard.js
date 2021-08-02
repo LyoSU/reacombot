@@ -11,6 +11,12 @@ function sleep (ms) {
   })
 }
 
+function raceAll (promises, timeout) {
+  return Promise.all(promises.map(p => {
+    return Promise.race([p, sleep(timeout)])
+  }))
+}
+
 const keyboardUpdate = async (channelId, channelMessageId, message) => {
   const channel = await db.Channel.findOne({ channelId })
   const post = await db.Post.findOne({ channel, channelMessageId })
@@ -95,11 +101,13 @@ async function checkPsotForUpdate () {
       $lt: new Date()
     }
   }).populate('channel')
+  const promises = []
   for (const post of findPost) {
-    await keyboardUpdate(post.channel.channelId, post.channelMessageId).catch(error => {
-      console.error('update post error:', error)
-    })
+    promises.push(keyboardUpdate(post.channel.channelId, post.channelMessageId))
   }
+  await raceAll(promises, 5 * 1000).catch(error => {
+    console.error('update post error:', error)
+  })
   setTimeout(checkPsotForUpdate, 1000)
 }
 setTimeout(checkPsotForUpdate, 1000)
