@@ -34,7 +34,7 @@ const keyboardUpdate = async (channelId, channelMessageId, message) => {
     if (post.groupMessageId) {
       votesKeyboardArray.push({
         text: `💬 ${post.commentsCount > 0 ? post.commentsCount : ''}`,
-        url: `https://t.me/c/${channel.groupId.toString().substr(4)}/${channel.settings.showStart === 'top' ? 1 : 1000000}?thread=${post.groupMessageId}`
+        url: `https://t.me/c/${channel.groupId.toString().substr(4)}/${channel.settings.showStart === 'top' ? 2 : post.groupMessageId + 1000000}?thread=${post.groupMessageId}`
       })
     } else {
       if (new Date().getTime() > new Date(post.createdAt.getTime() + (1000 * 30)).getTime()) {
