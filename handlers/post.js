@@ -87,7 +87,7 @@ composer.action('post:wait', async (ctx, next) => {
 })
 
 composer.on('message', async (ctx, next) => {
-  if (ctx.from.id === 777000 && ctx.message.forward_from_message_id) {
+  if (ctx.from.id === 777000 && ctx.message.forward_from_message_id && ctx.message.forward_from_chat.id === ctx.message.sender_chat.id) {
     const channel = await ctx.db.Channel.findOne({ channelId: ctx.message.forward_from_chat.id })
     const post = await ctx.db.Post.findOne({ channel, channelMessageId: ctx.message.forward_from_message_id })
 

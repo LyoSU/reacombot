@@ -86,7 +86,7 @@ const keyboardUpdate = async (channelId, channelMessageId, message) => {
         }
         return { edited: false, error }
       }),
-      sleep(150).then(() => {
+      sleep(350).then(() => {
         return { edited: false, error: 'timeout' }
       })
     ])
@@ -106,9 +106,10 @@ async function checkPsotForUpdate () {
     promises.push(keyboardUpdate(post.channel.channelId, post.channelMessageId))
   }
   if (promises.length > 0) {
-    await raceAll(promises, 5 * 1000).catch(error => {
+    const result = await raceAll(promises, 5 * 1000).catch(error => {
       console.error('update post error:', error)
     })
+    console.log('result keyboard update:', result)
   }
   setTimeout(checkPsotForUpdate, 1000)
 }
