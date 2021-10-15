@@ -55,7 +55,7 @@ const keyboardUpdate = async (channelId, channelMessageId, message) => {
     reply_markup: JSON.stringify({ inline_keyboard: [votesKeyboardArray].concat(post.keyboard) })
   }
 
-  if (message && message.type) {
+  if (message) {
     if (message.type === 'text') {
       methodUpdate = 'editMessageText'
       optsUpdate.text = message.text
@@ -63,6 +63,9 @@ const keyboardUpdate = async (channelId, channelMessageId, message) => {
     if (message.type === 'media') {
       methodUpdate = 'editMessageCaption'
       optsUpdate.caption = message.text
+    }
+    if (message.entities) {
+      optsUpdate.entities = message.entities
     }
   }
 
