@@ -61,7 +61,7 @@ composer.on('channel_post', async (ctx, next) => {
   const updateResult = await keyboardUpdate(post.channel.channelId, post.channelMessageId, {
     type: messageType,
     text: newText,
-    entities: ctx.message.entities
+    entities: ctx.channelPost.entities
   })
 
   if (updateResult.error && updateResult.error.code === 400 && !ctx.channelPost.forward_from_message_id) {
