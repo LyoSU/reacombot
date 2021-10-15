@@ -98,7 +98,7 @@ const keyboardUpdate = async (channelId, channelMessageId, message) => {
   }
 }
 
-async function checkPsotForUpdate () {
+async function checkPostForUpdate () {
   const findPost = await db.Post.find({
     keyboardNextUpdate: {
       $lt: new Date()
@@ -114,8 +114,8 @@ async function checkPsotForUpdate () {
     })
     console.log('result keyboard update:', result)
   }
-  setTimeout(checkPsotForUpdate, 1000)
+  setTimeout(checkPostForUpdate, 1000)
 }
-setTimeout(checkPsotForUpdate, 1000)
+setTimeout(checkPostForUpdate, 1000)
 
 module.exports = keyboardUpdate

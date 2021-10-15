@@ -108,3 +108,22 @@ db.connection.once('open', async () => {
     console.log('bot start polling')
   })
 })
+
+const { Snake } = require('tgsnake')
+
+const mtbot = new Snake({
+  apiId: parseInt(process.env.API_ID),
+  apiHash: process.env.API_HASH,
+  botToken: process.env.BOT_TOKEN,
+  logger: 'none'
+})
+
+mtbot.run()
+
+mtbot.use(async (ctx) => {
+  const results = await ctx.telegram.getMessages(ctx.chat.id, [ctx.id])
+
+  console.log(results)
+
+  console.log(ctx)
+})
