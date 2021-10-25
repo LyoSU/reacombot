@@ -59,13 +59,12 @@ const keyboardUpdate = async (channelId, channelMessageId, message) => {
     if (message.type === 'text') {
       methodUpdate = 'editMessageText'
       optsUpdate.text = message.text
+      optsUpdate.entities = message.entities
     }
     if (message.type === 'media') {
       methodUpdate = 'editMessageCaption'
       optsUpdate.caption = message.text
-    }
-    if (message.entities) {
-      optsUpdate.entities = message.entities
+      optsUpdate.caption_entities = message.entities
     }
   }
 
