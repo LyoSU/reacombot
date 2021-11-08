@@ -1,16 +1,17 @@
 ---
 language_name: '🇦🇿 Azərbaycanca'
 help: |
-  <b>Salam! 👋</b>
-  Kanaldakı yazılarınıza <u>reaksiyaları yozumla</u> əlavə edəcəm. Sadəcə məni kanalınıza əlavə etmək, mesajları "edit" etmək üçün icazə vermək və eyni zamanda kanala bağlı qrupa əlavə etmək kifayətdir.
+  <b>Hey! 👋</b>
+  I will add <u>reactions</u> to your posts on the channel along with <u>native comments</u>. It's enough just to add me to your channel, give me permission to edit messages, and also add me to the group that is tied to the channel.
 
-  • Bütün mesajları dəyişdirməyimi istəmirsinizsə və ya emoji dəyişdirmək istəmirsinizsə, aşağıdakı düymələri vurun və ya konfiqurasiya etmək üçün /channels əmri göndərin. <i>Bir kanalı siyahıda göstərmək üçün əvvəlcə hər hansı bir yazı yazmalısınız.</i>
+  • If you do not want me to change all messages or want to change emoji, then click the buttons below or send the command /channels to configure. <i>To display a channel in the list, you must first write any post.</i>
 
-  <b>• Yardıma ehtiyacınız var və ya təklifiniz var?</b> Mənə yazın: @Ly_OBot. Xahiş edirəm sualları dərhal yazın və ingiliscə və ya rusca yazın.
-  <b>• Botu bəyənirsiniz?</b> Ona bu linkdən kömək edə bilərsiniz: donate.lyo.su
+  <b>• Need help or have a suggestion?</b> Write to me: @Ly_OBot. Please write immediately what you are talking about and use English or Russian.
+  <b>• Do you like the bot?</b> You can help him at this link: donate.lyo.su
 
-  🧑‍💻 Geliştiricini izləyin: @LyBlog (Yalnız rus dilində)
-  👀 Tərcüməçi: @Sadykhzadeh
+  🧑‍💻 Follow the developer: @LyBlog (Only in Russian)
+
+  source: github.com/LyoSU/reacombot
 menu:
   channels: '📣 Kanallarım'
 channels:

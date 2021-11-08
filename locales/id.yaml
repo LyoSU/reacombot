@@ -10,6 +10,8 @@ help: |
   <b>• Do you like the bot?</b> You can help him at this link: donate.lyo.su
 
   🧑‍💻 Follow the developer: @LyBlog (Only in Russian)
+
+  source: github.com/LyoSU/reacombot
 menu:
   channels: '📣 My channels'
 channels:
