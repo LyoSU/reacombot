@@ -1,15 +1,17 @@
 ---
 language_name: '🇧🇷 Português'
 help: |
-  <b>Ei! 👋</b>
-  Vou adicionar <u>reações</u> às suas postagens no canal juntamente com <u>comentários nativos</u>. Basta me adicionar ao seu canal. Dê-me permissão para editar mensagens e também me adicione ao grupo que está vinculado ao canal.
+  <b>Hey! 👋</b>
+  I will add <u>reactions</u> to your posts on the channel along with <u>native comments</u>. It's enough just to add me to your channel, give me permission to edit messages, and also add me to the group that is tied to the channel.
 
-  • Se você não quer que eu altere todas as mensagens ou queira alterar os emojis, clique nos botões abaixo ou envie o comando /channels para configurar. <i>Para exibir um canal na lista, você precisa primeiro publicar alguma postagem.</i>
+  • If you do not want me to change all messages or want to change emoji, then click the buttons below or send the command /channels to configure. <i>To display a channel in the list, you must first write any post.</i>
 
-  <b>• Precisa de ajuda ou tem uma sugestão?</b> Escreva-me: @Ly_OBot. Por favor, seja direto e use inglês ou russo.
-  <b>• Você gosta do bot?</b> Você pode ajudá-lo neste link: donate.lyo.su
+  <b>• Need help or have a suggestion?</b> Write to me: @Ly_OBot. Please write immediately what you are talking about and use English or Russian.
+  <b>• Do you like the bot?</b> You can help him at this link: donate.lyo.su
 
-  🧑‍💻 Siga o desenvolvedor: @LyBlog (Em Russo)
+  🧑‍💻 Follow the developer: @LyBlog (Only in Russian)
+
+  source: github.com/LyoSU/reacombot
 menu:
   channels: '📣 Meus canais'
 channels:
