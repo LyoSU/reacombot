@@ -117,4 +117,13 @@ async function checkPostForUpdate () {
 }
 setTimeout(checkPostForUpdate, 1000)
 
+setInterval(() => {
+  db.Post.updateMany(
+    { keyboardNextUpdate: { $ne: null } },
+    { $set: { keyboardNextUpdate: null } }
+  ).then(result => {
+    console.log('keyboard update stopped', result)
+  })
+}, 1000 * 60 * 60)
+
 module.exports = keyboardUpdate
