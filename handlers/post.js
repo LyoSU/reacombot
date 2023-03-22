@@ -1,10 +1,8 @@
 const Composer = require('telegraf/composer')
-const EmojiDbLib = require('emoji-db')
 const {
-  keyboardUpdate
+  keyboardUpdate,
+  findEmojis
 } = require('../helpers')
-
-const emojiDb = new EmojiDbLib({ useDefaultDb: true })
 
 const composer = new Composer()
 
@@ -25,7 +23,7 @@ composer.on('channel_post', async (ctx, next) => {
     const lastLine = textLines.pop()
 
     if (lastLine[0] === '!') {
-      const emojisFromLine = emojiDb.searchFromText({ input: lastLine, fixCodePoints: true })
+      const emojisFromLine = findEmojis(lastLine)
       if (emojisFromLine.length > 0) emojis = emojisFromLine
 
       newText = textLines.join('\n')
@@ -36,11 +34,11 @@ composer.on('channel_post', async (ctx, next) => {
   }
 
   if (!emojis && ctx.session.channelInfo.settings.type === 'request') return next()
-  if (!emojis) emojis = emojiDb.searchFromText({ input: ctx.session.channelInfo.settings.emojis, fixCodePoints: true })
+  if (!emojis) emojis = findEmojis(ctx.session.channelInfo.settings.emojis)
 
-  emojis.forEach(data => {
+  emojis.forEach(emoji => {
     votesRateArray.push({
-      name: data.emoji,
+      name: emoji,
       vote: []
     })
   })

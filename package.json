@@ -20,7 +20,7 @@
   "dependencies": {
     "@pm2/io": "^4.3.5",
     "dotenv": "^8.6.0",
-    "emoji-db": "^14.0.1",
+    "emoji-regex": "^10.2.1",
     "mongoose": "^5.13.2",
     "telegraf": "^3.39.0",
     "telegraf-i18n": "^6.6.0",
