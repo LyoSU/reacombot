@@ -2,15 +2,13 @@ const Composer = require('telegraf/composer')
 const Scene = require('telegraf/scenes/base')
 const Markup = require('telegraf/markup')
 const { match } = require('telegraf-i18n')
-const EmojiDbLib = require('emoji-db')
 const {
   scenes
 } = require('../middlewares')
 const {
-  getChannel
+  getChannel,
+  findEmojis
 } = require('../helpers')
-
-const emojiDb = new EmojiDbLib({ useDefaultDb: true })
 
 const composer = new Composer()
 
@@ -70,9 +68,8 @@ setChannelEmoji.enter(async ctx => {
 setChannelEmoji.on('text', async ctx => {
   const channel = await ctx.db.Channel.findById(ctx.scene.state.channelId)
 
-  const emojis = emojiDb.searchFromText({ input: ctx.message.text, fixCodePoints: true })
-  const emojisArray = emojis.map(data => data.emoji)
-  channel.settings.emojis = emojisArray.join('')
+  const emojis = findEmojis(ctx.message.text)
+  channel.settings.emojis = emojis.join('')
   if (channel.settings.emojis.length <= 0) channel.settings.emojis = new ctx.db.Channel().settings.emojis
   await channel.save()
 
