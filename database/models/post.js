@@ -44,4 +44,7 @@ const schema = Schema({
   timestamps: true
 })
 
+// Every post lookup is by channel + message id
+schema.index({ channel: 1, channelMessageId: -1 })
+
 module.exports = schema
