@@ -7,7 +7,6 @@ help: |
   • If you do not want me to change all messages or want to change emoji, then click the buttons below or send the command /channels to configure. <i>To display a channel in the list, you must first write any post.</i>
 
   <b>• Need help or have a suggestion?</b> Write to me: @Ly_OBot. Please write immediately what you are talking about and use English or Russian.
-  <b>• Do you like the bot?</b> You can help him at this link: donate.lyo.su
 
   🧑‍💻 Follow the developer: @LyBlog (Only in Russian)
 
@@ -70,7 +69,7 @@ channels:
         <b>Отправить список клавиатуры:</b>
 
         Пример:
-        <pre>Мой сайт - https://lyo.su/ | Telegram - https://telegram.org/
+        <pre>Мой сайт - https://lyubchak.com/ | Telegram - https://telegram.org/
         Dev блог - https://t.me/LyBlog</pre>
 
         Отправить любой текст для удаления.
